@@ -1,9 +1,10 @@
-import type React from "react";
 import { Provider } from "react-redux";
 import { Bounce, ToastContainer } from "react-toastify";
 import { store } from "~/app/store";
 import "react-toastify/dist/ReactToastify.css";
-const Providers = ({ children }: { children: React.ReactNode }) => {
+import { RouterProvider } from 'react-router-dom'
+import { router } from '~/shared/routes'
+const Providers = () => {
 	return (
 		<Provider store={store}>
 			<ToastContainer
@@ -19,7 +20,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 				theme="light"
 				transition={Bounce}
 			/>
-			{children}
+<RouterProvider router={router}/>
 		</Provider>
 	);
 };
