@@ -1,6 +1,6 @@
 import { Box, Container } from '@mui/material'
 import { LoginForm } from '~/components/Login'
-import { TestProfiles } from '~/components/TestProfiles'
+import { TestProfiles } from '~/components/TestProfilesList'
 
 const Login = () => {
 	return (

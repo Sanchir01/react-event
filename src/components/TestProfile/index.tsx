@@ -1,12 +1,13 @@
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
-import { UserFieldsInfo } from '../assets/icons/UserFieldsInfo'
-import { useLoginMutation } from '~/app/store/api/login'
+import { UserFieldsInfo } from '../../shared/assets/icons/UserFieldsInfo.tsx'
+import { useLoginMutation } from '~/app/store/api/login.ts'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { AuthServiceTokens } from '~/shared/utils/token.service.ts'
 
-export const UserCardTest = ({
+export const Index = ({
 	title,
 	login,
 	password
@@ -19,14 +20,15 @@ export const UserCardTest = ({
 	const navigate = useNavigate()
 
 	const loginTestUser = async () => {
-		try {
-			await mutate({ login, password })
-			toast.success('Вы успешно авторизовались')
-		} catch (e) {
-			console.log(e)
-			return
-		}
-		navigate('/')
+		mutate({ login, password })
+			.then(
+				({ data }) =>
+					data !== undefined &&
+					(AuthServiceTokens.saveRefreshTokenToStorage(data.token),
+					navigate('/'),
+					toast.success('Вы успешно авторизовались'))
+			)
+			.catch(() => toast.error('не получилось авторизоваться'))
 	}
 	return (
 		<Box
