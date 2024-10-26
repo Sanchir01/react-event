@@ -7,6 +7,7 @@ const ErrorGetCard = () => {
         imgUrl={errorImg}
         text={'Ошибка! Не удалось загрузить информацию'}
         dimensions={{'width': 419, 'height': 240}}
+        color={'#D32F2F'}
     />
 }
 export default ErrorGetCard;

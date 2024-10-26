@@ -8,6 +8,7 @@ const NotFoundGetCard = () => {
         imgUrl={notFoundImg}
         text={'Запросы не найдены'}
         dimensions={{'width': 262, 'height': 272}}
+        color={'black'}
     />
 }
 

@@ -1,8 +1,19 @@
-import {Avatar, Box, Button, Card, CardActions, CardContent, Divider, LinearProgress, Typography} from "@mui/material";
+import {
+    Avatar,
+    Box,
+    Button,
+    Card,
+    CardActions,
+    CardContent,
+    Divider,
+    Grid2,
+    LinearProgress,
+    Typography
+} from "@mui/material";
 
-const GeneralCardWithLinear = ({title, additionalContent, goal, completionDate, collected}) => {
-    return <Card sx={{ maxWidth: 320, borderRadius: 2, boxShadow: 3 }}>
-        <CardContent>
+const GeneralCardWithLinear = ({title, additionalContent, goal, completionDate, collected, collectedGoal}) => {
+    return <Card sx={{ maxWidth: 320, borderRadius: 2, boxShadow: 3 , height: '100%'}}>
+        <CardContent sx={{paddingBottom: 0}}>
             {title}
             {additionalContent}
             <Typography variant='body2' color='textSecondary' gutterBottom>
@@ -11,16 +22,24 @@ const GeneralCardWithLinear = ({title, additionalContent, goal, completionDate, 
             <Typography variant='body2' color='textSecondary' gutterBottom>
                 <strong>Завершение:</strong> {completionDate}
             </Typography>
-            <Divider sx={{ my: 2 }} />
             <Typography variant='body2' color='textSecondary'>
-                <strong>Мы собрали:</strong> {collected}
+                <strong>Мы собрали:</strong>
             </Typography>
             <LinearProgress
                 variant='determinate'
                 value={60}
-                sx={{ mt: 1, mb: 2 }}
+                sx={{ mt: 1, mb: 0 }}
             />
-            <Typography variant='body2' color='textSecondary'>
+            <Grid2 container>
+                <Grid2 item size={6}>
+                    <Typography color='textSecondary' fontSize={'14px'}>{collected}</Typography>
+                </Grid2>
+                <Grid2 item size={6} display={'flex'} justifyContent={'end'}>
+                    <Typography color='textSecondary' fontSize={'14px'}>{collectedGoal}</Typography>
+                </Grid2>
+            </Grid2>
+
+            <Typography variant='body2' color='textSecondary' sx={{marginTop: '15px'}}>
                 Нас уже: 3 566 987
             </Typography>
         </CardContent>

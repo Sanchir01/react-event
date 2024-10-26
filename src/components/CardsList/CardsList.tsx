@@ -38,6 +38,7 @@ const CardsList: React.FC = () => {
 							goal='Цель сбора: Тестовая цель'
 							completionDate='20.03.2025'
 							collected='1 102 563 руб'
+							collectedGoal='2 102 563 руб'
 						/>
 					</Grid>
 				))}
