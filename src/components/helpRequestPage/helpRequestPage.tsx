@@ -14,6 +14,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import {Fragment} from "react";
+import HelpRequestCard from "~/components/CardsList/HelpRequestCard.tsx";
 
 const HelpRequestPage = () => {
 
@@ -111,7 +112,15 @@ const HelpRequestPage = () => {
             </Grid2>
 
             <Grid2 container item id={'additional-content'} size={3}>
-                Вместе для добрых дел
+                <Box height={'900px'}>
+                    <HelpRequestCard
+                        title={<Typography variant={'h6'}>Вместе для добрых дел</Typography>}
+                        goal={"Оплатить лечение МКБ в клинике \"Здоровье\". Купить одежду на зимний сезон. Пополнить запасы лекарств на три месяца. Обеспечить уход на дому в течении полугода."}
+                        collected={'1 102 563 руб'}
+                        completionDate={''}
+                    />
+                </Box>
+
             </Grid2>
         </Grid2>
 
