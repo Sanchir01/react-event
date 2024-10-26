@@ -123,26 +123,26 @@ export const RenderDate = () => {
 				</Box>
 			</Box>
 			<Grid2 container>
-				<Grid2 item size={12}>
+				<Grid2 component={'div'} size={12}>
 					<Typography variant={'h6'} sx={{ mb: 1 }}>
 						Контакты
 					</Typography>
 				</Grid2>
-				<Grid2 item size={12} container>
-					<Grid2 item size={4}>
+				<Grid2 component={'div'} size={12} container>
+					<Grid2 component={'div'} size={4}>
 						<Typography variant={'subtitle2'} sx={{ fontWeight: '600' }}>
 							{' '}
 							Телефон
 						</Typography>
 						<Typography variant={'body2'}> + 7 999 888 99 50</Typography>
 					</Grid2>
-					<Grid2 item size={4}>
+					<Grid2 component={'div'} size={4}>
 						<Typography variant={'subtitle2'} sx={{ fontWeight: '600' }}>
 							E-mail
 						</Typography>
 						<Typography variant={'body2'}> forExample2@yandex.ru</Typography>
 					</Grid2>
-					<Grid2 item size={4}>
+					<Grid2 component={'div'} size={4}>
 						<Typography variant={'subtitle2'} sx={{ fontWeight: '600' }}>
 							Сайт
 						</Typography>
