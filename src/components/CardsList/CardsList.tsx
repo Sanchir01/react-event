@@ -3,7 +3,8 @@ import { Container, Typography, Box, Grid, Pagination } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { RootState } from '~/app/store'
 import FundraisingCard from './FundraisingCard'
-import { useGetHelpRequestsQuery } from '~/shared/api/helpRequestsApi'
+import { useGetAllCardsQuery } from '~/shared/api/helpRequestsApi'
+import { HelpRequest } from '~/shared/types'
 
 const CardsList: React.FC = () => {
 	const [currentPage, setCurrentPage] = useState(1)
@@ -14,7 +15,7 @@ const CardsList: React.FC = () => {
 		isLoading,
 		isError,
 		refetch
-	} = useGetHelpRequestsQuery(undefined, {
+	} = useGetAllCardsQuery(undefined, {
 		skip: !token
 	})
 
@@ -33,10 +34,7 @@ const CardsList: React.FC = () => {
 
 	if (!token) {
 		return (
-			<Container
-				maxWidth='lg'
-				sx={{ height: '1080px', display: 'flex', flexDirection: 'column' }}
-			>
+			<Container maxWidth='lg'>
 				<Typography variant='h5' gutterBottom>
 					Пожалуйста, авторизуйтесь, чтобы просмотреть запросы о помощи.
 				</Typography>
@@ -46,10 +44,7 @@ const CardsList: React.FC = () => {
 
 	if (isLoading) {
 		return (
-			<Container
-				maxWidth='lg'
-				sx={{ height: '1080px', display: 'flex', flexDirection: 'column' }}
-			>
+			<Container maxWidth='lg'>
 				<Typography variant='h5' gutterBottom>
 					Загрузка запросов о помощи...
 				</Typography>
@@ -59,10 +54,7 @@ const CardsList: React.FC = () => {
 
 	if (isError) {
 		return (
-			<Container
-				maxWidth='lg'
-				sx={{ height: '1080px', display: 'flex', flexDirection: 'column' }}
-			>
+			<Container maxWidth='lg'>
 				<Typography variant='h5' gutterBottom color='error'>
 					Ошибка при загрузке запросов о помощи.
 				</Typography>
@@ -82,7 +74,7 @@ const CardsList: React.FC = () => {
 				Найдено: {totalCards}
 			</Typography>
 			<Grid container spacing={3}>
-				{currentCards.map(request => (
+				{currentCards.map((request: HelpRequest) => (
 					<Grid item xs={12} sm={6} md={4} key={request.id}>
 						<FundraisingCard
 							title={request.title}
