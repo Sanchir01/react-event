@@ -1,21 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Typography, Box, Grid, Pagination } from '@mui/material'
+import { useSelector } from 'react-redux'
+import { RootState } from '~/app/store'
 import FundraisingCard from './FundraisingCard'
+import { useGetHelpRequestsQuery } from '~/shared/api/helpRequestsApi'
 
 const CardsList: React.FC = () => {
 	const [currentPage, setCurrentPage] = useState(1)
 	const cardsPerPage = 3
-	const totalCards = 10
+	const { token } = useSelector((state: RootState) => state.auth)
+	const {
+		data: helpRequests,
+		isLoading,
+		isError,
+		refetch
+	} = useGetHelpRequestsQuery(undefined, {
+		skip: !token
+	})
 
-	// Генерация списка карточек
-	const cards = Array.from({ length: totalCards }, (_, index) => index + 1)
+	useEffect(() => {
+		if (token) {
+			refetch()
+		}
+	}, [token, refetch])
 
-	// Вычисление текущих карточек для отображения
-	const indexOfLastCard = currentPage * cardsPerPage
-	const indexOfFirstCard = indexOfLastCard - cardsPerPage
-	const currentCards = cards.slice(indexOfFirstCard, indexOfLastCard)
-
-	// Обработка изменения страницы
 	const handlePageChange = (
 		event: React.ChangeEvent<unknown>,
 		value: number
@@ -23,21 +31,66 @@ const CardsList: React.FC = () => {
 		setCurrentPage(value)
 	}
 
+	if (!token) {
+		return (
+			<Container
+				maxWidth='lg'
+				sx={{ height: '1080px', display: 'flex', flexDirection: 'column' }}
+			>
+				<Typography variant='h5' gutterBottom>
+					Пожалуйста, авторизуйтесь, чтобы просмотреть запросы о помощи.
+				</Typography>
+			</Container>
+		)
+	}
+
+	if (isLoading) {
+		return (
+			<Container
+				maxWidth='lg'
+				sx={{ height: '1080px', display: 'flex', flexDirection: 'column' }}
+			>
+				<Typography variant='h5' gutterBottom>
+					Загрузка запросов о помощи...
+				</Typography>
+			</Container>
+		)
+	}
+
+	if (isError) {
+		return (
+			<Container
+				maxWidth='lg'
+				sx={{ height: '1080px', display: 'flex', flexDirection: 'column' }}
+			>
+				<Typography variant='h5' gutterBottom color='error'>
+					Ошибка при загрузке запросов о помощи.
+				</Typography>
+			</Container>
+		)
+	}
+
+	const totalCards = helpRequests ? helpRequests.length : 0
+	const indexOfLastCard = currentPage * cardsPerPage
+	const indexOfFirstCard = indexOfLastCard - cardsPerPage
+	const currentCards =
+		helpRequests?.slice(indexOfFirstCard, indexOfLastCard) || []
+
 	return (
 		<Container maxWidth='lg'>
 			<Typography variant='h5' gutterBottom>
 				Найдено: {totalCards}
 			</Typography>
 			<Grid container spacing={3}>
-				{currentCards.map(item => (
-					<Grid item xs={12} sm={6} md={4} key={item}>
+				{currentCards.map(request => (
+					<Grid item xs={12} sm={6} md={4} key={request.id}>
 						<FundraisingCard
-							title={`Сбор средств для проекта ${item}`}
-							organizer='Фонд помощи'
-							location='Регион: Тестовый'
-							goal='Цель сбора: Тестовая цель'
-							completionDate='20.03.2025'
-							collected='1 102 563 руб'
+							title={request.title}
+							organizer={request.organization.title}
+							location={`Город: ${request.location.city}`}
+							goal={request.goalDescription}
+							completionDate={request.endingDate}
+							collected={`${request.requestGoalCurrentValue} из ${request.requestGoal} руб`}
 						/>
 					</Grid>
 				))}
