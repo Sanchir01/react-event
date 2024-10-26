@@ -1,7 +1,11 @@
 import CardsList from '~/components/CardsList/CardsList'
 
 function App() {
-	return <CardsList></CardsList>
+	return (
+		<>
+			<CardsList />
+		</>
+	)
 }
 
 export default App
