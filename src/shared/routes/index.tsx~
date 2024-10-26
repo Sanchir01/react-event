@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import Main from '~/pages/main'
 import TestPage from '~/pages/test'
-import Login from '~/pages/login'
 
 export const router = createBrowserRouter([
 	{
