@@ -1,10 +1,11 @@
+import HelpRequestPage from "~/components/helpRequestPage/helpRequestPage.tsx";
 
 function App() {
 
 
 	return (
 		<>
-			test
+			<HelpRequestPage />
 		</>
 	);
 }
