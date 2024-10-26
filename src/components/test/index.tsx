@@ -1,4 +1,4 @@
-import CardsList from './CardsList'
+import CardsList from '../CardsList/CardsList'
 
 export const Test = () => {
 	return (

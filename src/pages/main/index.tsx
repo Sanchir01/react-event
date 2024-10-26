@@ -1,4 +1,4 @@
-import CardsList from '~/components/test/CardsList'
+import CardsList from '~/components/CardsList/CardsList'
 
 function App() {
 	return <CardsList></CardsList>
