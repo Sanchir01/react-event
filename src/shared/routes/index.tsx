@@ -3,6 +3,7 @@ import Main from '~/pages/main'
 import TestPage from '~/pages/test'
 import Login from '~/pages/login'
 import MainPageLayout from '~/app/MainPageLayout'
+import { PrivateRoute } from './PrivateRoute'
 
 export const router = createBrowserRouter([
 	{
@@ -11,13 +12,13 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: <Main />
+				element: <PrivateRoute element={<Main />} />
 			}
 		]
 	},
 	{
 		path: '/test',
-		element: <TestPage />
+		element: <PrivateRoute element={<TestPage />} />
 	},
 	{
 		path: '/login',

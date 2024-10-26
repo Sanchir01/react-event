@@ -34,3 +34,11 @@ export interface HelpRequest {
 	requestGoal: number
 	requestGoalCurrentValue: number
 }
+
+export interface FilterCriteria {
+	categories?: string[]
+	specialization?: string[]
+	format?: string[]
+	volunteerType?: string[]
+	date?: string
+}

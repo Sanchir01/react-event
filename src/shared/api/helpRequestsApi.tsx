@@ -8,7 +8,6 @@ export const helpRequestsApi = createApi({
 		baseUrl: import.meta.env.VITE_SERVER_URL,
 		prepareHeaders: (headers, { getState }) => {
 			const token = (getState() as RootState).auth?.token
-			console.log('helpRequestsApi' + token)
 			if (token) {
 				headers.set('Authorization', `Bearer ${token}`)
 			}

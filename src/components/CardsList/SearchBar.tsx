@@ -1,4 +1,4 @@
-import { TextField, InputAdornment, Typography } from '@mui/material'
+import { TextField, InputAdornment, Typography, Box } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 
 interface SearchBarProps {
@@ -12,8 +12,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
 	}
 
 	return (
-		<>
-			{' '}
+		<Box mt='20px' mb='40px' mx='36px'>
 			<Typography variant='h5' gutterBottom>
 				Найти запрос
 			</Typography>
@@ -32,7 +31,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
 				}}
 				sx={{ mb: 2, fontSize: '1.25rem' }}
 			/>
-		</>
+		</Box>
 	)
 }
 
