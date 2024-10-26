@@ -91,6 +91,7 @@ const CardsList: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
 							goal={request.goalDescription}
 							completionDate={request.endingDate}
 							collected={`${request.requestGoalCurrentValue} из ${request.requestGoal} руб`}
+							contributorsCount={request.contributorsCount}
 						/>
 					</Grid>
 				))}

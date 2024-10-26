@@ -19,6 +19,7 @@ interface FundraisingCardProps {
 	goal: string
 	completionDate: string
 	collected: string
+	contributorsCount: string
 }
 
 const FundraisingCard: React.FC<FundraisingCardProps> = ({
@@ -27,7 +28,8 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 	location,
 	goal,
 	completionDate,
-	collected
+	collected,
+	contributorsCount
 }) => {
 	return (
 		<Card
@@ -95,7 +97,7 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 				}}
 			>
 				<Typography variant='body2' color='textSecondary'>
-					Нас уже: 3 566 987
+					Нас уже: {contributorsCount}
 				</Typography>
 				<Button
 					fullWidth
