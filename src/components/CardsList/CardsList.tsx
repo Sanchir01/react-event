@@ -26,7 +26,7 @@ const CardsList: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
 	}, [token, refetch])
 
 	const handlePageChange = (
-		event: React.ChangeEvent<unknown>,
+		_event: React.ChangeEvent<unknown>,
 		value: number
 	) => {
 		setCurrentPage(value)

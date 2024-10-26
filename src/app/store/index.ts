@@ -1,20 +1,24 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { authApi } from '~/shared/api/authApi'
-import { helpRequestsApi } from '~/shared/api/helpRequestsApi'
-import { authReducer } from '~/shared/api/authSlice'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { apiAuth } from '~/app/store/api/login'
+import { createLogger } from 'redux-logger'
+import { apiProfile } from './api/profile'
+
+const logger = createLogger({
+	collapsed: true
+})
+
+const rootReducer = combineReducers({
+	[apiAuth.reducerPath]: apiAuth.reducer,
+	[apiProfile.reducerPath]: apiProfile.reducer
+})
 
 export const store = configureStore({
-	reducer: {
-		[authApi.reducerPath]: authApi.reducer,
-		[helpRequestsApi.reducerPath]: helpRequestsApi.reducer,
-		auth: authReducer
-	},
+	reducer: rootReducer,
 	middleware: getDefaultMiddleware =>
-		getDefaultMiddleware().concat(
-			authApi.middleware,
-			helpRequestsApi.middleware
-		),
-	devTools: true
+		getDefaultMiddleware()
+			.concat(apiAuth.middleware)
+			.concat(apiProfile.middleware)
+			.concat(logger)
 })
 
 export type RootState = ReturnType<typeof store.getState>
