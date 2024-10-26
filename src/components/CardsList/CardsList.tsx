@@ -6,7 +6,7 @@ import FundraisingCard from './FundraisingCard'
 import { useGetAllCardsQuery } from '~/shared/api/helpRequestsApi'
 import { HelpRequest } from '~/shared/types'
 
-const CardsList: React.FC = () => {
+const CardsList: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
 	const [currentPage, setCurrentPage] = useState(1)
 	const cardsPerPage = 3
 	const { token } = useSelector((state: RootState) => state.auth)
@@ -31,6 +31,15 @@ const CardsList: React.FC = () => {
 	) => {
 		setCurrentPage(value)
 	}
+
+	const filteredCards =
+		helpRequests?.filter(
+			(request: HelpRequest) =>
+				request.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+				request.organization.title
+					.toLowerCase()
+					.includes(searchTerm.toLowerCase())
+		) || []
 
 	if (!token) {
 		return (
@@ -62,11 +71,10 @@ const CardsList: React.FC = () => {
 		)
 	}
 
-	const totalCards = helpRequests ? helpRequests.length : 0
+	const totalCards = filteredCards.length
 	const indexOfLastCard = currentPage * cardsPerPage
 	const indexOfFirstCard = indexOfLastCard - cardsPerPage
-	const currentCards =
-		helpRequests?.slice(indexOfFirstCard, indexOfLastCard) || []
+	const currentCards = filteredCards.slice(indexOfFirstCard, indexOfLastCard)
 
 	return (
 		<Container maxWidth='lg'>
