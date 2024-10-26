@@ -1,8 +1,10 @@
 import { AppBar, Toolbar, IconButton, Avatar } from '@mui/material'
 import '../../shared/styles/Header.css'
 import { Link } from 'react-router-dom'
+import { AuthServiceTokens } from '~/shared/utils/token.service.ts'
 
 const Header = () => {
+	const token = AuthServiceTokens.getRefreshToken()
 	return (
 		<div className='headerContainer'>
 			<AppBar position='static' color='transparent' className='header'>
@@ -18,11 +20,11 @@ const Header = () => {
 						<a href='#' className='headerLink'>
 							Запросы о помощи
 						</a>
-						<a href='#' className='profileLink'>
+						<Link to={token ? '/profile' : '/login'} className='profileLink'>
 							<IconButton className='profileButton'>
 								<Avatar className='profileAvatar' />
 							</IconButton>
-						</a>
+						</Link>
 					</div>
 				</Toolbar>
 			</AppBar>

@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material'
 import Box from '@mui/material/Box'
 import { testUsers } from '~/shared/constants/testUsers'
-import { UserCardTest } from '~/shared/ui/UserCardTest'
+import { Index } from '~/components/TestProfile'
 
 export const TestProfiles = () => {
 	return (
@@ -20,7 +20,7 @@ export const TestProfiles = () => {
 				Тестовые пользователи
 			</Typography>
 			{testUsers.map(user => (
-				<UserCardTest
+				<Index
 					key={user.login}
 					login={user.login}
 					password={user.password}

@@ -7,8 +7,11 @@ import { InputLoginType, LoginSchema } from '~/shared/types/Login.types'
 import { toast } from 'react-toastify'
 import { useEffect } from 'react'
 import { useLoginMutation } from '~/app/store/api/login'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import st from '~/shared/styles/Login.module.scss'
+import { AuthServiceTokens } from '~/shared/utils/token.service.ts'
+import { useNavigate } from 'react-router-dom'
+
 export const LoginForm = () => {
 	useEffect(() => {
 		document.title = 'Авторизация'
@@ -26,23 +29,23 @@ export const LoginForm = () => {
 
 	const onSubmit: SubmitHandler<InputLoginType> = async data => {
 		try {
-			await mutate({ login: data.login, password: data.password }).then(r =>
-				console.log(r)
-			)
-			toast.success('Вы успешно авторизовались')
-			form.reset()
-			navigate('/')
+			const res = await mutate({ login: data.login, password: data.password })
+			if (res.data) {
+				AuthServiceTokens.saveRefreshTokenToStorage(res.data.token)
+			}
 		} catch (e) {
 			console.log(e)
-			toast.error('Неправильный логин или пароль')
+			toast.error('Неверное имя пользователя или пароль')
+			return
 		}
+		navigate('/')
+		form.reset()
 	}
 	return (
 		<Box
 			sx={{
 				display: 'flex',
 				flexDirection: 'column',
-
 				border: '1px solid #E0E0E0',
 				width: '750px',
 				height: '844px',
