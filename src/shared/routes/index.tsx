@@ -4,6 +4,10 @@ import Login from '~/pages/login'
 import MainPageLayout from '~/app/MainPageLayout'
 import { UserProfilePage } from '~/pages/profile'
 
+import HelpRequestPage from '~/pages/onerequers'
+import { store } from '~/app/store'
+import { apiProfile } from '~/app/store/api/profile.ts'
+
 export const router = createBrowserRouter([
 	{
 		path: '/',
@@ -11,16 +15,28 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: <Main />
+				element: <Main />,
+				loader: async () => {}
 			},
 			{
 				path: 'profile',
-				element: <UserProfilePage />
+				element: <UserProfilePage />,
+
+				loader: async () => {
+					await store.dispatch(
+						apiProfile.util.prefetch('getProfile', undefined, {})
+					)
+					return null
+				}
+			},
+			{
+				path: '/login',
+				element: <Login />
+			},
+			{
+				path: '/request',
+				element: <HelpRequestPage />
 			}
 		]
-	},
-	{
-		path: '/login',
-		element: <Login />
 	}
 ])
