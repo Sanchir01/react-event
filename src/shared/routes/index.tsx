@@ -7,6 +7,8 @@ import { UserProfilePage } from '~/pages/profile'
 import HelpRequestPage from '~/pages/onerequers'
 import { store } from '~/app/store'
 import { apiProfile } from '~/app/store/api/profile.ts'
+import { apiHelpRequests } from '~/app/store/api/helpRequestsApi.ts'
+import { PrivateRoute } from '~/shared/routes/PrivateRoute.tsx'
 
 export const router = createBrowserRouter([
 	{
@@ -16,11 +18,16 @@ export const router = createBrowserRouter([
 			{
 				index: true,
 				element: <Main />,
-				loader: async () => {}
+				loader: async () => {
+					store.dispatch(
+						apiHelpRequests.util.prefetch('getAllCards', undefined, {})
+					)
+					return null
+				}
 			},
 			{
 				path: 'profile',
-				element: <UserProfilePage />,
+				element: <PrivateRoute element={<UserProfilePage />} />,
 
 				loader: async () => {
 					await store.dispatch(

@@ -17,9 +17,9 @@ const Header = () => {
 						/>
 					</Link>
 					<div className='headerBlock'>
-						<a href='#' className='headerLink'>
+						<Link to={'/'} className='headerLink'>
 							Запросы о помощи
-						</a>
+						</Link>
 						<Link to={token ? '/profile' : '/login'} className='profileLink'>
 							<IconButton className='profileButton'>
 								<Avatar className='profileAvatar' />
