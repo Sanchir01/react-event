@@ -1,11 +1,12 @@
+import { CardListFilters } from "~/components/test/CardListFilters";
 
 function App() {
 
 
 	return (
-		<>
-			test
-		</>
+		<div style={{backgroundColor: 'gray'}}>
+			<CardListFilters />
+		</div>
 	);
 }
 
