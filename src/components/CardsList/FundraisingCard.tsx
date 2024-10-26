@@ -19,7 +19,7 @@ interface FundraisingCardProps {
 	goal: string
 	completionDate: string
 	collected: string
-	contributorsCount: string
+	contributorsCount: number
 }
 
 const FundraisingCard: React.FC<FundraisingCardProps> = ({

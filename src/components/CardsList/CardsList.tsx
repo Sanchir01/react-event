@@ -9,7 +9,7 @@ import { HelpRequest } from '~/shared/types'
 const CardsList: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
 	const [currentPage, setCurrentPage] = useState(1)
 	const cardsPerPage = 3
-	const { token } = useSelector((state: RootState) => state.auth)
+	const token = useSelector((state: RootState) => state.auth.token)
 	const {
 		data: helpRequests,
 		isLoading,
@@ -23,10 +23,11 @@ const CardsList: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
 		if (token) {
 			refetch()
 		}
+		console.log(token)
 	}, [token, refetch])
 
 	const handlePageChange = (
-		_event: React.ChangeEvent<unknown>,
+		event: React.ChangeEvent<unknown>,
 		value: number
 	) => {
 		setCurrentPage(value)

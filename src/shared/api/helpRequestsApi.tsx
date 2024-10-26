@@ -5,9 +5,10 @@ import { HelpRequest } from '~/shared/types'
 export const helpRequestsApi = createApi({
 	reducerPath: 'helpRequestsApi',
 	baseQuery: fetchBaseQuery({
-		baseUrl: 'http://localhost:4040',
+		baseUrl: import.meta.env.VITE_SERVER_URL,
 		prepareHeaders: (headers, { getState }) => {
 			const token = (getState() as RootState).auth?.token
+			console.log('helpRequestsApi' + token)
 			if (token) {
 				headers.set('Authorization', `Bearer ${token}`)
 			}
@@ -18,16 +19,16 @@ export const helpRequestsApi = createApi({
 	tagTypes: ['HelpRequest'],
 	endpoints: builder => ({
 		getAllCards: builder.query<HelpRequest[], void>({
-			query: () => '/api/request',
+			query: () => '/request',
 			providesTags: ['HelpRequest']
 		}),
 		getHelpRequestById: builder.query<HelpRequest, string>({
-			query: id => `/api/request/${id}`,
+			query: id => `/request/${id}`,
 			providesTags: (result, error, id) => [{ type: 'HelpRequest', id }]
 		}),
 		createHelpRequest: builder.mutation<HelpRequest, Partial<HelpRequest>>({
 			query: newRequest => ({
-				url: '/api/request',
+				url: '/request',
 				method: 'POST',
 				body: newRequest
 			}),
@@ -38,7 +39,7 @@ export const helpRequestsApi = createApi({
 			{ id: string; data: Partial<HelpRequest> }
 		>({
 			query: ({ id, data }) => ({
-				url: `/api/request/${id}`,
+				url: `/request/${id}`,
 				method: 'PUT',
 				body: data
 			}),
@@ -49,7 +50,7 @@ export const helpRequestsApi = createApi({
 			string
 		>({
 			query: id => ({
-				url: `/api/request/${id}`,
+				url: `/request/${id}`,
 				method: 'DELETE'
 			}),
 			invalidatesTags: (result, error, id) => [{ type: 'HelpRequest', id }]

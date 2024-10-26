@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import CardsList from '~/components/CardsList/CardsList'
 import SearchBar from '~/components/CardsList/SearchBar'
-import TestAuth from '~/components/test/testAuth'
 
 function App() {
 	const [searchTerm, setSearchTerm] = useState('')
@@ -12,7 +11,6 @@ function App() {
 	return (
 		<>
 			<SearchBar value={searchTerm} onChange={handleSearchChange} />
-			<TestAuth></TestAuth>
 			<CardsList searchTerm={searchTerm} />
 		</>
 	)
