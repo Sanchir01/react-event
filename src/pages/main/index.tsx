@@ -1,13 +1,11 @@
-import HelpRequestPage from "~/components/helpRequestPage/helpRequestPage.tsx";
+import CardsList from '~/components/CardsList/CardsList'
 
 function App() {
-
-
 	return (
 		<>
-			<HelpRequestPage />
+			<CardsList />
 		</>
-	);
+	)
 }
 
-export default App;
+export default App
