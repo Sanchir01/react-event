@@ -5,9 +5,6 @@ import MainPageLayout from '~/app/MainPageLayout'
 import { UserProfilePage } from '~/pages/profile'
 
 import HelpRequestPage from '~/pages/onerequers'
-import { store } from '~/app/store'
-import { apiProfile } from '~/app/store/api/profile.ts'
-import { apiHelpRequests } from '~/app/store/api/helpRequestsApi.ts'
 import { PrivateRoute } from '~/shared/routes/PrivateRoute.tsx'
 
 export const router = createBrowserRouter([
@@ -17,22 +14,11 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: <PrivateRoute element={<Main />} />,
-				loader: async () => {
-					store.dispatch(
-						apiHelpRequests.util.prefetch('getAllCards', undefined, {})
-					)
-					return null
-				}
+				element: <PrivateRoute element={<Main />} />
 			},
 			{
 				path: '/user',
-				element: <PrivateRoute element={<UserProfilePage />} />,
-
-				loader: async () => {
-					store.dispatch(apiProfile.util.prefetch('getProfile', undefined, {}))
-					return null
-				}
+				element: <PrivateRoute element={<UserProfilePage />} />
 			},
 			{
 				path: '/login',
@@ -40,7 +26,7 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: '/request/:id',
-				element: <PrivateRoute element={<HelpRequestPage/>} />
+				element: <PrivateRoute element={<HelpRequestPage />} />
 			}
 		]
 	}

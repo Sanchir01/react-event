@@ -31,7 +31,9 @@ const HelpRequestPage = () => {
 	}
 
 	if (isError) {
-		return <ErrorGetCard />
+		return (
+			<ErrorGetCard/>
+		)
 	}
 	return (
 		<Grid2 container sx={{ backgroundColor: '#F5F5F5', pl: 4 }}>
