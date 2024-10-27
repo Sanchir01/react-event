@@ -3,11 +3,13 @@ import { Outlet } from 'react-router-dom'
 import Footer from '~/components/Footer/Footer.tsx'
 const MainPageLayout = () => {
 	return (
-		<>
+		<div className={'wrapper'}>
 			<Header />
-			<Outlet />
+			<main>
+				<Outlet />
+			</main>
 			<Footer />
-		</>
+		</div>
 	)
 }
 

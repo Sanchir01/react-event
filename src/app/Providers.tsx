@@ -22,6 +22,7 @@ const Providers = () => {
 				transition={Bounce}
 			/>
 			<CssBaseline />
+
 			<RouterProvider router={router} />
 		</Provider>
 	)

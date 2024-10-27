@@ -22,7 +22,7 @@ export const UserProfilePage = () => {
 				{isLoadingFavorites ? (
 					<>loading</>
 				) : isSuccessFavorites ? (
-					<>test</>
+					<>{favoritesData}</>
 				) : (
 					<>error</>
 				)}

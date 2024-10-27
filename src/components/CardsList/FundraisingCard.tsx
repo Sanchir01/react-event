@@ -19,6 +19,7 @@ interface FundraisingCardProps {
 	goal: string
 	completionDate: string
 	collected: string
+	contributorsCount: number
 }
 
 const FundraisingCard: React.FC<FundraisingCardProps> = ({
@@ -27,10 +28,22 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 	location,
 	goal,
 	completionDate,
-	collected
+	collected,
+	contributorsCount
 }) => {
 	return (
-		<Card sx={{ maxWidth: 320, borderRadius: 2, boxShadow: 3 }}>
+		<Card
+			sx={{
+				maxWidth: 304,
+				borderRadius: 2,
+				boxShadow: 3,
+				height: '100%',
+				display: 'flex',
+				justifyContent: 'space-between',
+				flexDirection: 'column',
+				padding: '16px'
+			}}
+		>
 			<CardContent>
 				<Box display='flex' justifyContent='center' mb={2}>
 					<Avatar
@@ -73,12 +86,25 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 					value={60}
 					sx={{ mt: 1, mb: 2 }}
 				/>
-				<Typography variant='body2' color='textSecondary'>
-					Нас уже: 3 566 987
-				</Typography>
 			</CardContent>
-			<CardActions>
-				<Button fullWidth variant='contained' color='primary'>
+			<CardActions
+				sx={{
+					height: 92,
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'space-between',
+					padding: 0
+				}}
+			>
+				<Typography variant='body2' color='textSecondary'>
+					Нас уже: {contributorsCount}
+				</Typography>
+				<Button
+					fullWidth
+					variant='contained'
+					color='primary'
+					sx={{ marginBottom: '12px' }}
+				>
 					Помочь
 				</Button>
 			</CardActions>

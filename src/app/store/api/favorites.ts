@@ -1,26 +1,24 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { userSchema, UserType } from '~/shared/types/User.type.ts'
 import { AuthServiceTokens } from '~/shared/utils/token.service.ts'
+import { HelpRequest } from '~/shared/types/HelpRequest.types.ts'
 
-export const apiProfile = createApi({
-	reducerPath: 'Profile',
+export const apiAllFavorites = createApi({
+	reducerPath: 'AllFavorites',
 	baseQuery: fetchBaseQuery({
 		baseUrl: import.meta.env.VITE_SERVER_URL
 	}),
-	tagTypes: ['Profile'],
+	tagTypes: ['AllFavorites'],
 	endpoints: builder => ({
-		getProfile: builder.query<UserType, void>({
-			providesTags: ['Profile'],
+		getAllFavorites: builder.query<HelpRequest[], void>({
 			query: () => ({
-				url: '/user',
+				url: '/user/favourites',
 				method: 'GET',
 				headers: {
 					Authorization: `Bearer ${AuthServiceTokens.getRefreshToken()}`
 				}
-			}),
-			transformResponse: (res: unknown) => userSchema.parse(res)
+			})
 		})
 	})
 })
 
-export const { useGetProfileQuery } = apiProfile
+export const { useGetAllFavoritesQuery } = apiAllFavorites
