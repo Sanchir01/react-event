@@ -16,7 +16,7 @@ import {
 	Button
 } from '@mui/material'
 import DateRangeIcon from '@mui/icons-material/DateRange'
-import { FilterCriteria } from '~/shared/types'
+import { FilterCriteria } from '~/shared/types/HelpRequest.types'
 
 interface CardListFiltersProps {
 	filters: FilterCriteria
