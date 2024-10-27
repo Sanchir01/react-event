@@ -11,7 +11,7 @@ const ProfileSection: React.FC = () => {
 	const [selectedTab, setSelectedTab] = useState(0)
 	const [selectedIconTab, setSelectedIconTab] = useState(0)
 
-	const handleTabChange = (event: React.SyntheticEvent, newValue: number) =>
+	const handleTabChange = (_event: React.SyntheticEvent, newValue: number) =>
 		setSelectedTab(newValue)
 	const handleIconTabChange = (index: number) => setSelectedIconTab(index)
 

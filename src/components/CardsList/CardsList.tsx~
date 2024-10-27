@@ -7,9 +7,9 @@ import { useGetAllCardsQuery } from '~/app/store/api/helpRequestsApi.ts'
 import { AuthServiceTokens } from '~/shared/utils/token.service.ts'
 import ErrorGetCard from '~/components/errorGetCard/ErrorGetCard.tsx'
 
-const CardsList: React.FC<{ searchTerm: string; filters: FilterCriteria }> = ({
-	searchTerm,
-	filters
+const CardsList: React.FC<{ searchTerm?: string; filters?: FilterCriteria }> = ({
+	searchTerm = "",
+	filters =" "
 }) => {
 	const [currentPage, setCurrentPage] = useState(1)
 	const cardsPerPage = 3
@@ -136,12 +136,8 @@ const CardsList: React.FC<{ searchTerm: string; filters: FilterCriteria }> = ({
 							requestGoal={request.requestGoal}
 							requestGoalCurrentValue={request.requestGoalCurrentValue}
 							contributorsCount={request.contributorsCount}
-<<<<<<< HEAD
-							id={request.id}
-=======
 							requesterType={request.requesterType}
 							helpType={request.helpType}
->>>>>>> 1f64ca8efe1140ee1e5cd16be83355ebbfc7e48f
 						/>
 					</Grid>
 				))}
