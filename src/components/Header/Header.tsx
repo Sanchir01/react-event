@@ -64,7 +64,7 @@ const Header = () => {
 							transformOrigin={{ vertical: 'top', horizontal: 'right' }}
 						>
 							{token ? (
-								<>
+								<MenuItem>
 									<MenuItem
 										component={Link}
 										to='/profile'
@@ -81,7 +81,7 @@ const Header = () => {
 										</ListItemIcon>
 										<Typography variant='inherit'>Выйти</Typography>
 									</MenuItem>
-								</>
+								</MenuItem>
 							) : (
 								<MenuItem
 									component={Link}
