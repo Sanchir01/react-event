@@ -15,6 +15,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder'
 import DementiaImage from '~/shared/assets/Dementia.png'
 import NursingHomeImage from '~/shared/assets/Nursing home1.png'
 import VolunteeringImage from '~/shared/assets/Volunteering-pana 1.png'
+import {useNavigate, useParams} from "react-router-dom";
 
 interface FundraisingCardProps {
 	title: string
@@ -26,7 +27,8 @@ interface FundraisingCardProps {
 	requestGoal: number
 	contributorsCount: number
 	requesterType: string
-	helpType: string
+	helpType: string,
+	id: string
 }
 
 const FundraisingCard: React.FC<FundraisingCardProps> = ({
@@ -39,7 +41,7 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 	requestGoal,
 	contributorsCount,
 	requesterType,
-	helpType
+	helpType,id
 }) => {
 	const getImageByRequestParams = (requesterType: string, helpType: string) => {
 		if (requesterType === 'person' && helpType === 'finance') {
@@ -57,6 +59,8 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 	const formattedCompletionDate = completionDate
 		? format(new Date(completionDate), 'dd.MM.yyyy')
 		: 'N/A'
+
+	const navigate = useNavigate();
 
 	return (
 		<Card
@@ -168,6 +172,9 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 					variant='contained'
 					color='primary'
 					sx={{ marginBottom: '12px', marginLeft: '0px !important' }}
+					onClick={() => {
+						navigate(`/request/${id}`)
+					}}
 				>
 					Помочь
 				</Button>
