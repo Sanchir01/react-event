@@ -11,6 +11,7 @@ import {
 } from '@mui/material'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import DementiaImage from '~/shared/assets/Dementia.png'
+import {useNavigate} from "react-router-dom";
 
 interface FundraisingCardProps {
 	title: string
@@ -20,6 +21,7 @@ interface FundraisingCardProps {
 	completionDate: string
 	collected: string
 	contributorsCount: number
+	id: string
 }
 
 const FundraisingCard: React.FC<FundraisingCardProps> = ({
@@ -29,8 +31,12 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 	goal,
 	completionDate,
 	collected,
-	contributorsCount
+	contributorsCount,
+	id
 }) => {
+
+	const navigate = useNavigate();
+
 	return (
 		<Card
 			sx={{
@@ -104,6 +110,9 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 					variant='contained'
 					color='primary'
 					sx={{ marginBottom: '12px' }}
+					onClick={() => {
+						navigate(`/request/${id}`)
+					}}
 				>
 					Помочь
 				</Button>

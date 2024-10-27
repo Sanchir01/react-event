@@ -41,8 +41,8 @@ export const router = createBrowserRouter([
 				element: <Login />
 			},
 			{
-				path: '/request',
-				element: <HelpRequestPage />
+				path: '/request/:id',
+				element: <HelpRequestPage/>
 			}
 		]
 	}

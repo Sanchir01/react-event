@@ -130,6 +130,7 @@ const CardsList: React.FC<{ searchTerm: string; filters: FilterCriteria }> = ({
 							completionDate={request.endingDate}
 							collected={`${request.requestGoalCurrentValue} из ${request.requestGoal} руб`}
 							contributorsCount={request.contributorsCount}
+							id={request.id}
 						/>
 					</Grid>
 				))}

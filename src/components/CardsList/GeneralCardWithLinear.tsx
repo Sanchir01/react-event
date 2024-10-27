@@ -8,35 +8,38 @@ import {
 	Typography
 } from '@mui/material'
 import { HelpRequestCardType } from '~/pages/onerequers'
+import {calculatePercentage} from "~/shared/utils/mathUtils.tsx";
 
 const GeneralCardWithLinear = ({
 	title,
 	goal,
 	completionDate,
 	collected,
-	collectedGoal
+	collectedGoal,
+	contributorsCount
 }: HelpRequestCardType) => {
 	return (
-		<Card sx={{ maxWidth: 320, borderRadius: 2, boxShadow: 3, height: '100%' }}>
+		<Card sx={{ maxWidth: 320, borderRadius: 2, boxShadow: 3, ml:4 }}>
 			<CardContent sx={{ paddingBottom: 0 }}>
 				{title}
-				<Typography variant='body2' color='textSecondary' gutterBottom>
+				<Typography variant='body2' color='textSecondary' gutterBottom marginBottom={3} marginTop={1}>
 					<strong>Цель сбора:</strong> {goal}
 				</Typography>
-				<Typography variant='body2' color='textSecondary' gutterBottom>
+				<Typography variant='body2' color='textSecondary' gutterBottom marginBottom={3}>
 					<strong>Завершение:</strong> {completionDate}
 				</Typography>
-				<Typography variant='body2' color='textSecondary'>
+				<Typography variant='body2' color='textSecondary' >
 					<strong>Мы собрали:</strong>
 				</Typography>
 				<LinearProgress
 					variant='determinate'
-					value={60}
+					value={calculatePercentage(collected, collectedGoal)}
 					sx={{ mt: 1, mb: 0 }}
+
 				/>
 				<Grid2 container>
 					<Grid2 size={6}>
-						<Typography color='textSecondary' fontSize={'14px'}>
+						<Typography color='textSecondary' fontSize={'14px'} marginBottom={3}>
 							{collected}
 						</Typography>
 					</Grid2>
@@ -57,7 +60,7 @@ const GeneralCardWithLinear = ({
 					color='textSecondary'
 					sx={{ marginTop: '15px' }}
 				>
-					Нас уже: 3 566 987
+					Нас уже: {contributorsCount}
 				</Typography>
 			</CardContent>
 			<CardActions>
