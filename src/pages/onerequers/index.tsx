@@ -89,7 +89,7 @@ const HelpRequestPage = () => {
 							goal={helpRequestData.goalDescription}
 							collected={`${helpRequestData.requestGoalCurrentValue} руб`}
 							collectedGoal={`${helpRequestData.requestGoal} руб`}
-							completionDate={displayDate(helpRequestData.endingDate)}
+							completionDate={displayDate({ date: helpRequestData.endingDate })}
 							contributorsCount={helpRequestData.contributorsCount}
 						/>
 					</Box>
