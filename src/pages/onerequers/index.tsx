@@ -38,6 +38,7 @@ const HelpRequestPage = () => {
 
 	useEffect(() => {
 		if (allFavs) {
+			// @ts-ignore
 			setAddedToFav(allFavs.includes(id))
 		}
 	}, [allFavs])
@@ -57,15 +58,13 @@ const HelpRequestPage = () => {
 	}
 
 	const AddToFavouriteEvent = async () => {
-
 		if (addedToFav) {
-			await remove(id);
-			setAddedToFav(false);
+			await remove(id)
+			setAddedToFav(false)
 		} else {
-			await mutate(id);
-			setAddedToFav(true);
+			await mutate(id)
+			setAddedToFav(true)
 		}
-
 	}
 	const renderData = () => {
 		return (

@@ -9,7 +9,7 @@ export const apiAllFavorites = createApi({
 	}),
 	tagTypes: ['AllFavorites'],
 	endpoints: builder => ({
-		getAllFavourites: builder.query<HelpRequest, void>({
+		getAllFavourites: builder.query<HelpRequest[], void>({
 			query: () => ({
 				url: `/user/favourites`,
 				method: 'GET',
