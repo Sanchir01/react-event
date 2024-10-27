@@ -1,3 +1,6 @@
+main {
+    padding: 2px;
+}
 .profileContainer {
     width: 1500px; /* Фиксированная ширина контейнера */
     background-color: #F5F5F5; /* Цвет фона */
@@ -86,10 +89,12 @@
 .profileContent {
     width: 1080px;
     height: 982px;
-    padding: 16px 45px 40px 16px;
+    padding: 32px 45px 40px 16px;
     background-color: #fff;
     border: 1px solid #f5f5f5;
     position: relative;
+    height: max-content;
+
 }
 
 .profileTabs {
