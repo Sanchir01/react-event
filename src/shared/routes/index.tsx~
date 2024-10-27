@@ -30,7 +30,9 @@ export const router = createBrowserRouter([
 				element: <PrivateRoute element={<UserProfilePage />} />,
 
 				loader: async () => {
-					store.dispatch(apiProfile.util.prefetch('getProfile', undefined, {}))
+					 store.dispatch(
+						apiProfile.util.prefetch('getProfile', undefined, {})
+					)
 					return null
 				}
 			},
@@ -39,8 +41,8 @@ export const router = createBrowserRouter([
 				element: <Login />
 			},
 			{
-				path: '/request/:id',
-				element: <PrivateRoute element={<HelpRequestPage/>} />
+				path: '/request',
+				element: <PrivateRoute element={<HelpRequestPage />} />
 			}
 		]
 	}
