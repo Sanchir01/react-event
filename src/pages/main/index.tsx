@@ -2,8 +2,10 @@ import { useState } from 'react'
 import CardsList from '~/components/CardsList/CardsList'
 import SearchBar from '~/components/CardsList/SearchBar'
 import { CardListFilters } from '~/components/test/CardListFilters'
+import GridViewIcon from '@mui/icons-material/GridView'
+import ViewListIcon from '@mui/icons-material/ViewList'
 
-import { Box, Container, Typography } from '@mui/material'
+import { Box, Button, Container, Typography } from '@mui/material'
 import { FilterCriteria } from '~/shared/types/HelpRequest.types'
 
 function App() {
@@ -11,12 +13,20 @@ function App() {
 
 	const [filters, setFilters] = useState<FilterCriteria>({})
 
+	const [layout, setLayout] = useState<'horizontal' | 'vertical'>('horizontal')
+
 	const handleSearchChange = (value: string) => {
 		setSearchTerm(value)
 	}
 
 	const handleFiltersChange = (newFilters: FilterCriteria) => {
 		setFilters(newFilters)
+	}
+
+	const toggleLayout = () => {
+		setLayout(prevLayout =>
+			prevLayout === 'horizontal' ? 'vertical' : 'horizontal'
+		)
 	}
 
 	return (
@@ -28,6 +38,7 @@ function App() {
 			}}
 		>
 			<Typography variant='h3'>Запросы о помощи</Typography>
+
 			<Box display='flex' justifyContent={'space-between'}>
 				<CardListFilters filters={filters} onChange={handleFiltersChange} />
 				<Box
@@ -35,8 +46,28 @@ function App() {
 						width: '100%'
 					}}
 				>
-					<SearchBar value={searchTerm} onChange={handleSearchChange} />
-					<CardsList searchTerm={searchTerm} filters={filters} />
+					<Box display='flex'>
+						<SearchBar value={searchTerm} onChange={handleSearchChange} />
+						<Button onClick={toggleLayout} variant='contained' sx={{ mb: 2 }}>
+							{layout === 'horizontal' ? (
+								<Box display='flex' alignItems='center'>
+									<GridViewIcon sx={{ mr: 1 }} />
+									<Typography>Переключить вид на вертикальный</Typography>
+								</Box>
+							) : (
+								<Box display='flex' alignItems='center'>
+									<ViewListIcon sx={{ mr: 1 }} />
+									<Typography>Переключить вид на горизонтальный</Typography>
+								</Box>
+							)}
+						</Button>
+					</Box>
+
+					<CardsList
+						layout={layout}
+						searchTerm={searchTerm}
+						filters={filters}
+					/>
 				</Box>
 			</Box>
 		</Container>

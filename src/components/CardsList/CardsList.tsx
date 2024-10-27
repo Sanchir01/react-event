@@ -6,10 +6,18 @@ import { FilterCriteria } from '~/shared/types/HelpRequest.types'
 import { useGetAllCardsQuery } from '~/app/store/api/helpRequestsApi.ts'
 import { AuthServiceTokens } from '~/shared/utils/token.service.ts'
 import ErrorGetCard from '~/components/errorGetCard/ErrorGetCard.tsx'
+import FundraisingCardHorizontal from './FundraisingCardHorizontal'
 
-const CardsList: React.FC<{ searchTerm: string; filters: FilterCriteria }> = ({
+interface CardsListProps {
+	searchTerm: string
+	filters: FilterCriteria
+	layout: 'vertical' | 'horizontal'
+}
+
+const CardsList: React.FC<CardsListProps> = ({
 	searchTerm,
-	filters
+	filters,
+	layout
 }) => {
 	const [currentPage, setCurrentPage] = useState(1)
 	const cardsPerPage = 3
@@ -117,28 +125,47 @@ const CardsList: React.FC<{ searchTerm: string; filters: FilterCriteria }> = ({
 			<Typography variant='h5' gutterBottom>
 				Найдено: {totalCards}
 			</Typography>
-			<Grid container spacing={3} sx={{ height: '843px' }}>
+			<Grid
+				container
+				spacing={3}
+				sx={{ height: layout === 'vertical' ? '843px' : 'auto' }}
+			>
 				{currentCards.map((request: HelpRequest) => (
 					<Grid
 						item
 						xs={12}
-						sm={6}
-						md={4}
+						sm={layout === 'vertical' ? 6 : 12}
+						md={layout === 'vertical' ? 4 : 12}
 						key={request.id}
 						sx={{ display: 'flex' }}
 					>
-						<FundraisingCard
-							title={request.title}
-							organizer={request.organization.title}
-							location={request.location.city}
-							goal={request.goalDescription}
-							completionDate={request.endingDate}
-							requestGoal={request.requestGoal}
-							requestGoalCurrentValue={request.requestGoalCurrentValue}
-							contributorsCount={request.contributorsCount}
-							requesterType={request.requesterType}
-							helpType={request.helpType}
-						/>
+						{layout === 'vertical' ? (
+							<FundraisingCard
+								title={request.title}
+								organizer={request.organization.title}
+								location={request.location.city}
+								goal={request.goalDescription}
+								completionDate={request.endingDate}
+								requestGoal={request.requestGoal}
+								requestGoalCurrentValue={request.requestGoalCurrentValue}
+								contributorsCount={request.contributorsCount}
+								requesterType={request.requesterType}
+								helpType={request.helpType}
+							/>
+						) : (
+							<FundraisingCardHorizontal
+								title={request.title}
+								organizer={request.organization.title}
+								location={request.location.city}
+								goal={request.goalDescription}
+								completionDate={request.endingDate}
+								requestGoal={request.requestGoal}
+								requestGoalCurrentValue={request.requestGoalCurrentValue}
+								contributorsCount={request.contributorsCount}
+								requesterType={request.requesterType}
+								helpType={request.helpType}
+							/>
+						)}
 					</Grid>
 				))}
 			</Grid>
