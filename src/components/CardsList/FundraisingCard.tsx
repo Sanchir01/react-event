@@ -9,8 +9,12 @@ import {
 	Divider,
 	LinearProgress
 } from '@mui/material'
+import { format } from 'date-fns'
+
 import StarBorderIcon from '@mui/icons-material/StarBorder'
 import DementiaImage from '~/shared/assets/Dementia.png'
+import NursingHomeImage from '~/shared/assets/Nursing home1.png'
+import VolunteeringImage from '~/shared/assets/Volunteering-pana 1.png'
 
 interface FundraisingCardProps {
 	title: string
@@ -21,6 +25,8 @@ interface FundraisingCardProps {
 	requestGoalCurrentValue: number
 	requestGoal: number
 	contributorsCount: number
+	requesterType: string
+	helpType: string
 }
 
 const FundraisingCard: React.FC<FundraisingCardProps> = ({
@@ -31,8 +37,27 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 	completionDate,
 	requestGoalCurrentValue,
 	requestGoal,
-	contributorsCount
+	contributorsCount,
+	requesterType,
+	helpType
 }) => {
+	const getImageByRequestParams = (requesterType: string, helpType: string) => {
+		if (requesterType === 'person' && helpType === 'finance') {
+			return DementiaImage
+		}
+		if (requesterType === 'organization') {
+			return NursingHomeImage
+		}
+		if (requesterType === 'person' && helpType === 'material') {
+			return VolunteeringImage
+		}
+		// По умолчанию можно вернуть какое-то изображение
+		return DementiaImage
+	}
+	const formattedCompletionDate = completionDate
+		? format(new Date(completionDate), 'dd.MM.yyyy')
+		: 'N/A'
+
 	return (
 		<Card
 			sx={{
@@ -46,11 +71,18 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 				padding: '16px'
 			}}
 		>
-			<CardContent sx={{ padding: '0px' }}>
+			<CardContent
+				sx={{
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'space-between',
+					padding: '0px'
+				}}
+			>
 				<Box display='flex' justifyContent='center' mb={2}>
 					<Avatar
-						alt='Dementia'
-						src={DementiaImage}
+						alt='request image'
+						src={getImageByRequestParams(requesterType, helpType)}
 						sx={{ width: 220, height: 220 }}
 					/>
 				</Box>
@@ -73,23 +105,28 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 				</Box>
 
 				<Typography variant='body2' color='textSecondary' gutterBottom>
-					<strong>Организатор:</strong> {organizer}
+					<strong>Организатор:</strong>
+					<Typography>{organizer}</Typography>
 				</Typography>
 				<Typography variant='body2' color='textSecondary' gutterBottom>
-					<strong>Локация:</strong> {location}
+					<strong>Локация:</strong>
+					<Typography>{location}</Typography>
 				</Typography>
 				<Typography variant='body2' color='textSecondary' gutterBottom>
-					<strong>Цель сбора:</strong> {goal}
+					<strong>Цель сбора:</strong>
+					<Typography>{goal}</Typography>
 				</Typography>
 				<Typography variant='body2' color='textSecondary' gutterBottom>
-					<strong>Завершение:</strong> {completionDate}
+					<strong>Завершение:</strong>
+					<Typography>{formattedCompletionDate}</Typography>
 				</Typography>
 				<Divider sx={{ my: 2 }} />
 
 				<Typography variant='body2' color='textSecondary'>
-					<strong>
-						Мы собрали: {requestGoalCurrentValue} из {requestGoal} руб.
-					</strong>
+					<strong>Мы собрали:</strong>
+					<Typography>
+						{requestGoalCurrentValue} из {requestGoal} руб.
+					</Typography>
 				</Typography>
 				<LinearProgress
 					variant='determinate'
