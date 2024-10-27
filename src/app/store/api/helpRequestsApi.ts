@@ -29,9 +29,43 @@ export const apiHelpRequests = createApi({
 				}
 			})
 			// transformResponse: (res: unknown) => HelpRequestTypes.parse(res)
-		})
+		}),
+		addToFavourite: builder.mutation({
+			query: id => ({
+				url: `/user/favourites`,
+				body: {
+					"requestId": id
+				},
+				method: 'POST',
+				headers: {
+					Authorization: `Bearer ${AuthServiceTokens.getRefreshToken()}`
+				}
+			})
+			// transformResponse: (res: unknown) => HelpRequestTypes.parse(res)
+		}),
+		getAllFavourites: builder.query<HelpRequest, string>({
+			query: () => ({
+				url: `/user/favourites`,
+				method: 'GET',
+				headers: {
+					Authorization: `Bearer ${AuthServiceTokens.getRefreshToken()}`
+				}
+			})
+			// transformResponse: (res: unknown) => HelpRequestTypes.parse(res)
+		}),
+
+		// query: data => ({
+		// 	body: data,
+		// 	method: 'POST',
+		// 	url: 'auth'
+		// })
+
 	})
 })
 
-export const { useGetAllCardsQuery, useGetHelpRequestByIdQuery } =
-	apiHelpRequests
+export const {
+	useGetAllCardsQuery,
+	useGetHelpRequestByIdQuery,
+	useAddToFavouriteMutation,
+	useGetAllFavouritesQuery,
+} = apiHelpRequests
