@@ -1,0 +1,150 @@
+.profileContainer {
+    width: 1500px; /* Фиксированная ширина контейнера */
+    background-color: #F5F5F5; /* Цвет фона */
+    padding: 24px;
+    margin: 0 auto; /* Центрирование контейнера */
+}
+
+.profileTitle {
+    font-weight: bold;
+    text-align: left;
+    margin: 6px 0 20px 20px !important;
+}
+
+.profileSection {
+    display: flex;
+    gap: 20px; /* Отступ между боковой панелью и контентом */
+    border: 1px solid #f5f5f5;
+}
+
+.infoBlock {
+    margin-bottom: 20px; /* Отступ между блоками информации */
+}
+
+.infoBlock .sectionTitle {
+    margin-bottom: 10px; /* Отступ между заголовком и текстом */
+}
+
+.infoBlock .MuiTypography-body2 {
+    margin-bottom: 4px; /* Отступ между строками body2 */
+}
+
+.label {
+    font-weight: bold;
+}
+
+.profileSidebar {
+    width: 320px; /* Фиксированная ширина для боковой панели */
+    max-height: 436px;
+    margin: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #f5f5f5;
+}
+
+.personRounded {
+    width: 320px;
+    height: 240px;
+    border: 1px solid #f5f5f5;
+}
+
+.userInfoBlock {
+    width: 320px; /* Ширина блока под картинкой */
+    height: 196px; /* Высота блока под картинкой */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.userName {
+    font-weight: bold;
+    margin-top: 20px !important;
+    margin-bottom: 10px !important;
+}
+
+.userStatus {
+    margin-bottom: 16px;
+}
+
+.logoutButton {
+    width: 280px;
+    height: 42px;
+    color: #000000DE !important;
+    border-color: #000000DE !important;
+    margin-bottom: 20px !important;
+}
+
+.logoutButton:hover {
+    color: #1E88E5 !important;
+    border-color: #1E88E5 !important;
+    background-color: transparent !important;
+}
+
+.profileContent {
+    width: 1080px;
+    height: 982px;
+    padding: 16px 45px 40px 16px;
+    background-color: #fff;
+    border: 1px solid #f5f5f5;
+    position: relative;
+}
+
+.profileTabs {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 16px;
+    width: max-content;
+}
+
+.tabContent {
+    padding-left: 16px;
+    background-color: #fff;
+    width: 100%; /* Заполняет ширину контейнера */
+    height: calc(982px - 60px); /* Высота с учетом вкладок */
+}
+
+.aboutMeText {
+    margin-top: 8px;
+    line-height: 1.6;
+}
+
+.socialLinks {
+    list-style: none;
+    padding: 0;
+    margin-top: 8px;
+}
+
+.socialLinks li {
+    margin-bottom: 8px; /* Отступ между социальными кнопками */
+}
+
+.socialLink {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+}
+
+.socialLink:hover {
+    background-color: #f0f0f0;
+}
+
+.socialIcon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+.iconTabsContainer {
+    display: flex;
+    margin-top: 16px;
+    position: absolute;
+    top: 12px;
+    right: 36px;
+}
+
+
