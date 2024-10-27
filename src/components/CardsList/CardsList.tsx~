@@ -136,8 +136,12 @@ const CardsList: React.FC<{ searchTerm: string; filters: FilterCriteria }> = ({
 							requestGoal={request.requestGoal}
 							requestGoalCurrentValue={request.requestGoalCurrentValue}
 							contributorsCount={request.contributorsCount}
+<<<<<<< HEAD
+							id={request.id}
+=======
 							requesterType={request.requesterType}
 							helpType={request.helpType}
+>>>>>>> 1f64ca8efe1140ee1e5cd16be83355ebbfc7e48f
 						/>
 					</Grid>
 				))}
