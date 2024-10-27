@@ -44,6 +44,7 @@ export const apiHelpRequests = createApi({
 			// transformResponse: (res: unknown) => HelpRequestTypes.parse(res)
 		}),
 		getAllFavourites: builder.query<HelpRequest, string>({
+			providesTags: ['favourites'],
 			query: () => ({
 				url: `/user/favourites`,
 				method: 'GET',
@@ -54,11 +55,17 @@ export const apiHelpRequests = createApi({
 			// transformResponse: (res: unknown) => HelpRequestTypes.parse(res)
 		}),
 
-		// query: data => ({
-		// 	body: data,
-		// 	method: 'POST',
-		// 	url: 'auth'
-		// })
+		removeFromFavourites: builder.mutation({
+			invalidatesTags: ['favourites'],
+			query: id => ({
+				url: `/user/favourites/${id}`,
+				method: 'DELETE',
+				headers: {
+					Authorization: `Bearer ${AuthServiceTokens.getRefreshToken()}`
+				}
+			})
+			// transformResponse: (res: unknown) => HelpRequestTypes.parse(res)
+		}),
 
 	})
 })
@@ -68,4 +75,5 @@ export const {
 	useGetHelpRequestByIdQuery,
 	useAddToFavouriteMutation,
 	useGetAllFavouritesQuery,
+	useRemoveFromFavouritesMutation,
 } = apiHelpRequests
