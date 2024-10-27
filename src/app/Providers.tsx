@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { RouterProvider } from 'react-router-dom'
 import { router } from '~/shared/routes'
 import CssBaseline from '@mui/material/CssBaseline'
+import ProfileSection from '~/components/ProfileSection/ProfileSection'
 const Providers = () => {
 	return (
 		<Provider store={store}>
@@ -22,6 +23,7 @@ const Providers = () => {
 				transition={Bounce}
 			/>
 			<CssBaseline />
+			<ProfileSection></ProfileSection>
 
 			<RouterProvider router={router} />
 		</Provider>

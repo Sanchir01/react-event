@@ -7,6 +7,7 @@ import { useGetAllCardsQuery } from '~/app/store/api/helpRequestsApi.ts'
 import { AuthServiceTokens } from '~/shared/utils/token.service.ts'
 import ErrorGetCard from '~/components/errorGetCard/ErrorGetCard.tsx'
 
+
 const CardsList: React.FC<{ searchTerm: string; filters: FilterCriteria }> = ({
 	searchTerm,
 	filters

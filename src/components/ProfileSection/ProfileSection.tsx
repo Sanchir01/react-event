@@ -5,6 +5,7 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import PlaceIcon from '@mui/icons-material/Place';
 import './ProfileSection.css';
 import Map from './Map';
+import CardsList from '../CardsList/CardsList';
 
 const ProfileSection: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -154,14 +155,22 @@ const FavoritesTab: React.FC<{ selectedIconTab: number, onIconTabChange: (index:
 );
 
 const FavoritesObjects: React.FC = () => (
-  <div className="favoritesContent">
-   {/* Компонент*/}
-  </div>
+<CardsList
+          searchTerm={''}
+          filters={{
+            categories: [],
+            specialization: [],
+            format: [],
+            volunteerType: [],
+            date: ''
+          }}
+        />
+
 );
 
 const FavoritesDocuments: React.FC = () => (
   <div className="favoritesContent">
-       {/* Компонент*/}
+
   </div>
 );
 
