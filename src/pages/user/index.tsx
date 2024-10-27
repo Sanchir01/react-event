@@ -14,12 +14,21 @@ export const UserProfilePage = () => {
 		isSuccess: isSuccessFavorites
 	} = useGetAllFavoritesQuery()
 	console.log('profile', favoritesData)
+	console.log(data)
 	return (
 		<>
-			<div className=''>
-				{isLoading ? <>loading</> : isSuccess ? <>{data.id}</> : <>error</>}
+			<div>
+				{isLoading ? (
+					<>loading</>
+				) : isSuccess ? (
+					<>
+						<ProfileSection userData={data} />
+					</>
+				) : (
+					<>error</>
+				)}
 			</div>
-			<div className=''>
+			<div>
 				{isLoadingFavorites ? (
 					<>loading</>
 				) : isSuccessFavorites ? (
@@ -28,7 +37,6 @@ export const UserProfilePage = () => {
 					<>error</>
 				)}
 			</div>
-			<ProfileSection />
 		</>
 	)
 }
