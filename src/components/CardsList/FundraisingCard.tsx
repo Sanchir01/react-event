@@ -12,10 +12,10 @@ import {
 import { format } from 'date-fns'
 
 import StarBorderIcon from '@mui/icons-material/StarBorder'
-import DementiaImage from '~/shared/assets/Dementia.png'
-import NursingHomeImage from '~/shared/assets/Nursing home1.png'
-import VolunteeringImage from '~/shared/assets/Volunteering-pana 1.png'
-import {useNavigate, useParams} from "react-router-dom";
+import DementiaImage from '~/shared/assets/images/Dementia.png'
+import NursingHomeImage from '~/shared/assets/images/Nursing home1.png'
+import VolunteeringImage from '~/shared/assets/images/Volunteering-pana 1.png'
+import { useNavigate } from 'react-router-dom'
 
 interface FundraisingCardProps {
 	title: string
@@ -27,7 +27,7 @@ interface FundraisingCardProps {
 	requestGoal: number
 	contributorsCount: number
 	requesterType: string
-	helpType: string,
+	helpType: string
 	id: string
 }
 
@@ -41,7 +41,8 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 	requestGoal,
 	contributorsCount,
 	requesterType,
-	helpType,id
+	helpType,
+	id
 }) => {
 	const getImageByRequestParams = (requesterType: string, helpType: string) => {
 		if (requesterType === 'person' && helpType === 'finance') {
@@ -60,7 +61,7 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 		? format(new Date(completionDate), 'dd.MM.yyyy')
 		: 'N/A'
 
-	const navigate = useNavigate();
+	const navigate = useNavigate()
 
 	return (
 		<Card
