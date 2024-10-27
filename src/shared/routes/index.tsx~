@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import Main from '~/pages/main'
 import Login from '~/pages/login'
 import MainPageLayout from '~/app/MainPageLayout'
-import { UserProfilePage } from '~/pages/profile'
+import { UserProfilePage } from 'src/pages/user'
 
 import HelpRequestPage from '~/pages/onerequers'
 import { PrivateRoute } from '~/shared/routes/PrivateRoute.tsx'
@@ -14,17 +14,7 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-<<<<<<< HEAD
 				element: <PrivateRoute element={<Main />} />
-=======
-				element: <PrivateRoute element={<Main />} />,
-				loader: async () => {
-					store.dispatch(
-						apiHelpRequests.util.prefetch('getAllCards', undefined, {})
-					)
-					return null
-				}
->>>>>>> 1f64ca8efe1140ee1e5cd16be83355ebbfc7e48f
 			},
 			{
 				path: '/user',
