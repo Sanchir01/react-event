@@ -1,24 +1,20 @@
-import { Box, Button, Container, Grid2, Typography } from '@mui/material'
+import { Box, Container, Grid2, Typography } from '@mui/material'
 import { RenderData } from '~/components/Data/RenderData.tsx'
 import StarBorderIcon from '@mui/icons-material/StarBorder'
 import HelpRequestCard from '~/components/CardsList/HelpRequestCard.tsx'
 import { displayDate } from '~/shared/utils/dateUtils.tsx'
 import ErrorGetCard from '~/components/errorGetCard/ErrorGetCard.tsx'
 import {
-	useAddToFavouriteMutation, useGetAllCardsQuery,
-	useGetAllFavouritesQuery,
+	useAddToFavouriteMutation,
 	useGetHelpRequestByIdQuery
-} from "~/app/store/api/helpRequestsApi.ts";
-import {useParams} from "react-router-dom";
-import React, {useState} from "react";
-import {useLoginMutation} from "~/app/store/api/login.ts";
+} from '~/app/store/api/helpRequestsApi.ts'
+import { useParams } from 'react-router-dom'
+import React, { useState } from 'react'
 
 const HelpRequestPage = () => {
 	const { id = '' } = useParams<{ id: string }>()
-    const [mutate] = useAddToFavouriteMutation();
-    const [addedToFav, setAddedToFav] = useState(false);
-
-
+	const [mutate] = useAddToFavouriteMutation()
+	const [addedToFav, setAddedToFav] = useState(false)
 
 	const {
 		data: helpRequestData,
@@ -26,9 +22,9 @@ const HelpRequestPage = () => {
 		isError
 	} = useGetHelpRequestByIdQuery(id)
 
-	const {data: allFavs, isLoading: allFavsIsLoading} = useGetAllFavouritesQuery();
+	// const { data: allFavs, isLoading: allFavsIsLoading } =
+	// 	useGetAllFavouritesQuery()
 	// const { data: helpRequests, isLoading, isError } = useGetAllCardsQuery()
-
 
 	console.log(helpRequestData)
 	if (isLoading || !helpRequestData) {
@@ -76,39 +72,36 @@ const HelpRequestPage = () => {
 					>
 						<Box
 							onClick={async () => {
-
-                                const result = await mutate(id);
-                                setAddedToFav(result?.error?.originalStatus === 200)
-                            }}
-                            sx={{
-                                cursor: 'pointer',
-                                borderRadius: '4px',
-                                padding: '4px 10px',
-                                border: 'solid',
-                                borderWidth: '1px',
-                                mt: 4,
-                                height: '28px',
-                                alignItems: 'center'
-                            }}
-                            display={'flex'}
-                        >
-                            <StarBorderIcon color={addedToFav ? 'warning' : 'primary'}/>
-                            <Typography sx={{ml: 1}}>В избранное</Typography>
-                        </Box>
-
-
-                    </Grid2>
-                </Grid2>
-                <Grid2 container component={'div'} id={'additional-content'} size={3}>
-                    <Box height={'470px'}>
-                        <HelpRequestCard
-                            title={
-                                <Typography variant={'h6'}>Вместе для добрых дел</Typography>
-                            }
-                            goal={helpRequestData.goalDescription}
-                            collected={`${helpRequestData.requestGoalCurrentValue} руб`}
-                            collectedGoal={`${helpRequestData.requestGoal} руб`}
-                            completionDate={displayDate({ date: helpRequestData.endingDate })}
+								const result = await mutate(id)
+								setAddedToFav(result?.error?.originalStatus === 200)
+							}}
+							sx={{
+								cursor: 'pointer',
+								borderRadius: '4px',
+								padding: '4px 10px',
+								border: 'solid',
+								borderWidth: '1px',
+								mt: 4,
+								height: '28px',
+								alignItems: 'center'
+							}}
+							display={'flex'}
+						>
+							<StarBorderIcon color={addedToFav ? 'warning' : 'primary'} />
+							<Typography sx={{ ml: 1 }}>В избранное</Typography>
+						</Box>
+					</Grid2>
+				</Grid2>
+				<Grid2 container component={'div'} id={'additional-content'} size={3}>
+					<Box height={'470px'}>
+						<HelpRequestCard
+							title={
+								<Typography variant={'h6'}>Вместе для добрых дел</Typography>
+							}
+							goal={helpRequestData.goalDescription}
+							collected={`${helpRequestData.requestGoalCurrentValue} руб`}
+							collectedGoal={`${helpRequestData.requestGoal} руб`}
+							completionDate={displayDate({ date: helpRequestData.endingDate })}
 							contributorsCount={helpRequestData.contributorsCount}
 						/>
 					</Box>

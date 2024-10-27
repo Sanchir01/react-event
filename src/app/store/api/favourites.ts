@@ -9,7 +9,7 @@ export const apiAllFavorites = createApi({
 	}),
 	tagTypes: ['AllFavorites'],
 	endpoints: builder => ({
-		addToFavourite: builder.mutation({
+		addToFavourite: builder.mutation<HelpRequest, string>({
 			query: id => ({
 				url: `/user/favourites`,
 				body: {
@@ -22,7 +22,7 @@ export const apiAllFavorites = createApi({
 			})
 			// transformResponse: (res: unknown) => HelpRequestTypes.parse(res)
 		}),
-		getAllFavourites: builder.query<HelpRequest, string>({
+		getAllFavourites: builder.query<HelpRequest, void>({
 			query: () => ({
 				url: `/user/favourites`,
 				method: 'GET',
@@ -35,4 +35,5 @@ export const apiAllFavorites = createApi({
 	})
 })
 
-export const { useGetAllFavouritesQuery, useAddToFavouriteMutation } = apiAllFavorites
+export const { useAddToFavouriteMutation, useGetAllFavouritesQuery } =
+	apiAllFavorites

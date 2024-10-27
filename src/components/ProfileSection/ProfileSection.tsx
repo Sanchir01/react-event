@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
-import { Button, Typography, Tabs, Tab, IconButton } from '@mui/material'
+import React, { ReactNode, useState } from 'react'
+import { Button, Typography, Tabs, Tab, IconButton, Box } from '@mui/material'
 import GridViewIcon from '@mui/icons-material/GridView'
 import ListAltIcon from '@mui/icons-material/ListAlt'
 import PlaceIcon from '@mui/icons-material/Place'
 import './ProfileSection.css'
 import Map from './Map'
+import { TelegramIcon } from '~/shared/assets/images/telegram.tsx'
+import { WhatsappIcon } from '~/shared/assets/images/whatsapp.tsx'
+import { VkIcon } from '~/shared/assets/images/vk.tsx'
+import { UserAvatar } from '~/shared/assets/images/userAvatar.tsx'
 
 const ProfileSection: React.FC = () => {
 	const [selectedTab, setSelectedTab] = useState(0)
@@ -51,11 +55,7 @@ const ProfileSection: React.FC = () => {
 
 const ProfileSidebar: React.FC = () => (
 	<div className='profileSidebar'>
-		<img
-			src='/src/shared/assets/images/PersonRounded.svg'
-			className='personRounded'
-			alt='User Avatar'
-		/>
+		<UserAvatar />
 		<div className='userInfoBlock'>
 			<Typography variant='h6' className='userName'>
 				Ангелина Фомина
@@ -118,21 +118,9 @@ const ContactInfo: React.FC = () => (
 			<Typography variant='body2'>+7 999 555 66 11</Typography>
 		</Section>
 		<Section title='Социальные сети'>
-			<SocialLink
-				href='#'
-				icon='/src/shared/assets/images/vk.svg'
-				label='VKontakte'
-			/>
-			<SocialLink
-				href='#'
-				icon='/src/shared/assets/images/telegram.svg'
-				label='Telegram'
-			/>
-			<SocialLink
-				href='#'
-				icon='/src/shared/assets/images/whatsapp.svg'
-				label='WhatsApp'
-			/>
+			<SocialLink href='#' Icon={<VkIcon />} label='VKontakte' />
+			<SocialLink href='#' Icon={<TelegramIcon />} label='Telegram' />
+			<SocialLink href='#' Icon={<WhatsappIcon />} label='WhatsApp' />
 		</Section>
 	</>
 )
@@ -232,14 +220,16 @@ const InfoItem: React.FC<{ label: string; value: string }> = ({
 	</Typography>
 )
 
-const SocialLink: React.FC<{ href: string; icon: string; label: string }> = ({
-	href,
-	icon,
-	label
-}) => (
+const SocialLink: React.FC<{
+	href: string
+	Icon: ReactNode
+	label: string
+}> = ({ href, Icon, label }) => (
 	<a href={href} className='socialLink'>
-		<img src={icon} alt={label} className='socialIcon' />
-		<span>{label}</span>
+		<Box sx={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+			{Icon}
+			<span>{label}</span>
+		</Box>
 	</a>
 )
 

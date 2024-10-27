@@ -2,22 +2,30 @@ import { Box, Container, Grid2, Typography } from '@mui/material'
 import { RenderData } from '~/components/Data/RenderData.tsx'
 import StarBorderIcon from '@mui/icons-material/StarBorder'
 import HelpRequestCard from '~/components/CardsList/HelpRequestCard.tsx'
-import { useGetHelpRequestByIdQuery } from '~/app/store/api/helpRequestsApi.ts'
-import { useParams } from 'react-router-dom'
-import React from 'react'
 import { displayDate } from '~/shared/utils/dateUtils.tsx'
 import ErrorGetCard from '~/components/errorGetCard/ErrorGetCard.tsx'
+import {
+	useAddToFavouriteMutation,
+	useGetAllFavouritesQuery,
+	useGetHelpRequestByIdQuery
+} from '~/app/store/api/helpRequestsApi.ts'
+import { useParams } from 'react-router-dom'
+import React, { useState } from 'react'
 
 const HelpRequestPage = () => {
-	// const [searchParams, setSearchParams] = useSearchParams();
-
 	const { id = '' } = useParams<{ id: string }>()
+	const [mutate] = useAddToFavouriteMutation()
+	const [addedToFav, setAddedToFav] = useState(false)
 
 	const {
 		data: helpRequestData,
 		isLoading,
 		isError
 	} = useGetHelpRequestByIdQuery(id)
+
+	// const { data: allFavs, isLoading: allFavsIsLoading } =
+	// 	useGetAllFavouritesQuery()
+	// const { data: helpRequests, isLoading, isError } = useGetAllCardsQuery()
 
 	console.log(helpRequestData)
 	if (isLoading || !helpRequestData) {
@@ -64,7 +72,12 @@ const HelpRequestPage = () => {
 						justifyContent={'end'}
 					>
 						<Box
+							onClick={async () => {
+								const result = await mutate(id)
+								setAddedToFav(result?.error?.originalStatus === 200)
+							}}
 							sx={{
+								cursor: 'pointer',
 								borderRadius: '4px',
 								padding: '4px 10px',
 								border: 'solid',
@@ -75,7 +88,7 @@ const HelpRequestPage = () => {
 							}}
 							display={'flex'}
 						>
-							<StarBorderIcon />
+							<StarBorderIcon color={addedToFav ? 'warning' : 'primary'} />
 							<Typography sx={{ ml: 1 }}>В избранное</Typography>
 						</Box>
 					</Grid2>
