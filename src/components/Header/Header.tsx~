@@ -6,79 +6,89 @@ import {
 	Avatar,
 	Menu,
 	MenuItem,
-	ListItemIcon
+	ListItemIcon,
+	Typography
 } from '@mui/material'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import LogoutIcon from '@mui/icons-material/Logout'
+import { Link, useNavigate } from 'react-router-dom'
+import AccountCircle from '@mui/icons-material/AccountCircle'
+import Logout from '@mui/icons-material/Logout'
 import '../../shared/styles/Header.css'
 import { AuthServiceTokens } from '~/shared/utils/token.service.ts'
-import { Link, useNavigate } from 'react-router-dom'
 
-const Header: React.FC = () => {
+const Header = () => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+	const navigate = useNavigate()
 	const open = Boolean(anchorEl)
 
-	const handleAvatarClick = (event: React.MouseEvent<HTMLElement>) => {
+	const token = AuthServiceTokens.getRefreshToken()
+	const handleMenuClose = () => {
+		setAnchorEl(null)
+	}
+
+	const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget)
 	}
-	const navigate = useNavigate()
-	const handleClose = () => {
-		setAnchorEl(null)
+
+	const handleLogout = () => {
+		handleMenuClose()
 		AuthServiceTokens.removerTokenFromStorage()
 		navigate('/login')
 	}
-	const handleNavigateProifle = () => {
-		setAnchorEl(null)
-		navigate('/user')
-	}
 
-	const token = AuthServiceTokens.getRefreshToken()
 	return (
 		<div className='headerContainer'>
 			<AppBar position='static' color='transparent' className='header'>
 				<Toolbar className='toolbar'>
-					<div className='logoContainer'>
+					<Link to={'/'} className='logoContainer'>
 						<img
 							src='/src/shared/assets/images/_IconButton_.svg'
 							alt='Logo'
 							className='logoImage'
 						/>
-					</div>
+					</Link>
 					<div className='headerBlock'>
-						<Link to='/' className='headerLink'>
+						<Link to={'/'} className='headerLink'>
 							Запросы о помощи
 						</Link>
-						<IconButton onClick={handleAvatarClick} className='profileButton'>
+						<IconButton
+							sx={{ padding: '0 !important' }}
+							onClick={event => handleMenuOpen(event)}
+						>
 							<Avatar className='profileAvatar' />
 						</IconButton>
 						<Menu
 							anchorEl={anchorEl}
 							open={open}
-							onClose={handleClose}
-							transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-							anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+							onClose={handleMenuClose}
+							anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+							transformOrigin={{ vertical: 'top', horizontal: 'right' }}
 						>
-							{token && (
-								<MenuItem>
-									<ListItemIcon>
-										<AccountCircleIcon fontSize='small' />
-									</ListItemIcon>
-									Мой профиль
-								</MenuItem>
-							)}
 							{token ? (
-								<MenuItem onClick={handleClose}>
-									<ListItemIcon>
-										<LogoutIcon fontSize='small' />
-									</ListItemIcon>
-									Выйти
-								</MenuItem>
+								<>
+									<MenuItem
+										component={Link}
+										to='/profile'
+										onClick={handleMenuClose}
+									>
+										<ListItemIcon>
+											<AccountCircle fontSize='small' />
+										</ListItemIcon>
+										<Typography variant='inherit'>Мой профиль</Typography>
+									</MenuItem>
+									<MenuItem onClick={handleLogout}>
+										<ListItemIcon>
+											<Logout fontSize='small' />
+										</ListItemIcon>
+										<Typography variant='inherit'>Выйти</Typography>
+									</MenuItem>
+								</>
 							) : (
-								<MenuItem onClick={handleClose}>
-									<ListItemIcon>
-										<LogoutIcon fontSize='small' />
-									</ListItemIcon>
-									Войти
+								<MenuItem
+									component={Link}
+									to='/login'
+									onClick={handleMenuClose}
+								>
+									<Typography variant='inherit'>Войти</Typography>
 								</MenuItem>
 							)}
 						</Menu>

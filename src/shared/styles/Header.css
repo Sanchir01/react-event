@@ -1,66 +1,63 @@
 .headerContainer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  background-color: #FFFFFF;
-
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	background-color: #ffffff;
 }
 
 .header {
-  display: flex;
-  align-items: center;
-  max-width: 1920px;
-  width: 100%;
+	display: flex;
+	align-items: center;
+	width: 100%;
 }
 
 .MuiToolbar-root.toolbar {
-  padding: 0 !important;
+	padding: 0 !important;
 }
 
-
 .toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1500px;
-  width: 100%;
-  padding: 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	max-width: 1500px;
+	width: 100%;
+	padding: 0;
 }
 
 .menuButton {
-  margin-right: 16px;
+	margin-right: 16px;
 }
 
 .title {
-  flex-grow: 1;
+	flex-grow: 1;
 }
 
 .loginButton {
-  color: white;
+	color: white;
 }
 
 .headerBlock {
-  min-width: 824px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-left: auto;
+	min-width: 824px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-left: auto;
 }
 
 .headerLink {
-    font-family: Roboto, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
-    color: #000000DE;
-    text-decoration: none;
-    cursor: pointer;
-  }
+	font-family: Roboto, sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;
+	color: #000000de;
+	text-decoration: none;
+	cursor: pointer;
+}
 
-  .headerLink:hover {
-    color: #1E88E5;
-  }
+.headerLink:hover {
+	color: #1e88e5;
+}
 
-  .MuiIconButton-root.profileButton {
-    padding: 0 !important;
-  }
+.MuiIconButton-root.profileButton {
+	padding: 0 !important;
+}
