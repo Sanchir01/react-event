@@ -12,8 +12,9 @@ import {
 import { Link, useNavigate } from 'react-router-dom'
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import Logout from '@mui/icons-material/Logout'
-import '../../shared/styles/Header.css'
+import '~/shared/styles/Header.css'
 import { AuthServiceTokens } from '~/shared/utils/token.service.ts'
+import { Logo } from '~/shared/assets/icons/Logo.tsx'
 
 const Header = () => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -40,11 +41,7 @@ const Header = () => {
 			<AppBar position='static' color='transparent' className='header'>
 				<Toolbar className='toolbar'>
 					<Link to={'/'} className='logoContainer'>
-						<img
-							src='/src/shared/assets/images/_IconButton_.svg'
-							alt='Logo'
-							className='logoImage'
-						/>
+						<Logo/>
 					</Link>
 					<div className='headerBlock'>
 						<Link to={'/'} className='headerLink'>
@@ -67,7 +64,7 @@ const Header = () => {
 								<>
 									<MenuItem
 										component={Link}
-										to='/profile'
+										to='/user'
 										onClick={handleMenuClose}
 									>
 										<ListItemIcon>
