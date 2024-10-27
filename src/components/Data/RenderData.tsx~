@@ -74,7 +74,7 @@ export const RenderData = ({ data }: { data: HelpRequest }) => {
 					Завершение
 				</Typography>
 				<Typography variant={'body2'}>
-					{displayDate({ date: data.endingDate })}
+					{displayDate({date:data.endingDate})}
 				</Typography>
 			</Box>
 			<Box sx={{ mb: 3 }}>

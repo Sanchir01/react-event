@@ -41,7 +41,7 @@ const Header = () => {
 			<AppBar position='static' color='transparent' className='header'>
 				<Toolbar className='toolbar'>
 					<Link to={'/'} className='logoContainer'>
-						<Logo />
+						<Logo/>
 					</Link>
 					<div className='headerBlock'>
 						<Link to={'/'} className='headerLink'>

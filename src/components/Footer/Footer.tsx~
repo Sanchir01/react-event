@@ -15,7 +15,7 @@ const Footer = () => {
 				>
 					Github проекта
 				</a>
-				<a href='https://t.me/pixels_and_feather' className='footerLink'>
+				<a href='' className='footerLink'>
 					Чат для друзей
 				</a>
 			</nav>

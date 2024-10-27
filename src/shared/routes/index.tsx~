@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import Main from '~/pages/main'
 import Login from '~/pages/login'
 import MainPageLayout from '~/app/MainPageLayout'
-import { UserProfilePage } from '~/pages/user'
+import { UserProfilePage } from 'src/pages/user'
 
 import HelpRequestPage from '~/pages/onerequers'
 import { PrivateRoute } from '~/shared/routes/PrivateRoute.tsx'
