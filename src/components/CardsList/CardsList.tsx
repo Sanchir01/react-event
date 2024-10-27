@@ -69,9 +69,14 @@ const CardsList: React.FC<{ searchTerm: string; filters: FilterCriteria }> = ({
 							return true
 					}
 				}
+
 				if (typeof value === 'string' && key === 'date') {
+					if (value === '') {
+						return true // Игнорируем фильтр по дате, если значение пустое
+					}
 					return new Date(request.endingDate) <= new Date(value)
 				}
+
 				return true
 			})
 

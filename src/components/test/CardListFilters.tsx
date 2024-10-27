@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
 	styled,
 	Container,
@@ -16,46 +16,52 @@ import {
 	Button
 } from '@mui/material'
 import DateRangeIcon from '@mui/icons-material/DateRange'
-import { FilterCriteria } from '~/shared/types'
+import { FilterCriteria } from '~/shared/types/HelpRequest.types'
 
 interface CardListFiltersProps {
 	filters: FilterCriteria
 	onChange: (filters: FilterCriteria) => void
 }
-
 export const CardListFilters: React.FC<CardListFiltersProps> = ({
 	filters,
 	onChange
 }) => {
 	const [localFilters, setLocalFilters] = useState<FilterCriteria>(filters)
 
+	useEffect(() => {
+		setLocalFilters(filters)
+	}, [filters])
+
 	const handleCheckboxChange = (
 		category: keyof FilterCriteria,
 		value: string
 	) => {
-		const currentValues = Array.isArray(localFilters[category])
-			? (localFilters[category] as string[])
-			: []
-		const updatedCategories = currentValues.includes(value)
-			? currentValues.filter(item => item !== value)
-			: [...currentValues, value]
+		setLocalFilters(prevFilters => {
+			const currentValues = Array.isArray(prevFilters[category])
+				? (prevFilters[category] as string[])
+				: []
+			const updatedCategories = currentValues.includes(value)
+				? currentValues.filter(item => item !== value)
+				: [...currentValues, value]
 
-		const updatedFilters = {
-			...localFilters,
-			[category]: updatedCategories
-		}
+			const updatedFilters = {
+				...prevFilters,
+				[category]: updatedCategories
+			}
 
-		setLocalFilters(updatedFilters)
-		onChange(updatedFilters)
+			return updatedFilters
+		})
 	}
 
+	useEffect(() => {
+		onChange(localFilters)
+	}, [localFilters, onChange])
+
 	const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const updatedFilters = {
-			...localFilters,
+		setLocalFilters(prevFilters => ({
+			...prevFilters,
 			date: event.target.value
-		}
-		setLocalFilters(updatedFilters)
-		onChange(updatedFilters)
+		}))
 	}
 
 	const handleReset = () => {
@@ -304,11 +310,15 @@ export const CardListFilters: React.FC<CardListFiltersProps> = ({
 					fullWidth
 					id='date-of-relevance'
 					label='Выберите дату'
+					type='date'
 					variant='outlined'
 					size='small'
 					sx={{ mt: 1.25, mb: 5 }}
 					value={localFilters.date || ''}
 					onChange={handleDateChange}
+					InputLabelProps={{
+						shrink: true
+					}}
 					InputProps={{
 						endAdornment: (
 							<InputAdornment position='end'>

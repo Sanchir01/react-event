@@ -106,27 +106,39 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 
 				<Typography variant='body2' color='textSecondary' gutterBottom>
 					<strong>Организатор:</strong>
-					<Typography>{organizer}</Typography>
 				</Typography>
+				<Typography variant='body2' color='textSecondary' gutterBottom>
+					{organizer}
+				</Typography>
+
 				<Typography variant='body2' color='textSecondary' gutterBottom>
 					<strong>Локация:</strong>
-					<Typography>{location}</Typography>
 				</Typography>
+				<Typography variant='body2' color='textSecondary' gutterBottom>
+					{location}
+				</Typography>
+
 				<Typography variant='body2' color='textSecondary' gutterBottom>
 					<strong>Цель сбора:</strong>
-					<Typography>{goal}</Typography>
 				</Typography>
 				<Typography variant='body2' color='textSecondary' gutterBottom>
-					<strong>Завершение:</strong>
-					<Typography>{formattedCompletionDate}</Typography>
+					{goal}
 				</Typography>
+
+				<Typography variant='body2' color='textSecondary' gutterBottom>
+					<strong>Завершение:</strong>
+				</Typography>
+				<Typography variant='body2' color='textSecondary' gutterBottom>
+					{formattedCompletionDate}
+				</Typography>
+
 				<Divider sx={{ my: 2 }} />
 
-				<Typography variant='body2' color='textSecondary'>
+				<Typography variant='body2' color='textSecondary' gutterBottom>
 					<strong>Мы собрали:</strong>
-					<Typography>
-						{requestGoalCurrentValue} из {requestGoal} руб.
-					</Typography>
+				</Typography>
+				<Typography>
+					{requestGoalCurrentValue} из {requestGoal} руб.
 				</Typography>
 				<LinearProgress
 					variant='determinate'
