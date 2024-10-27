@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import {
 	AppBar,
 	Toolbar,
@@ -5,30 +6,35 @@ import {
 	Avatar,
 	Menu,
 	MenuItem,
-	ListItemIcon
+	ListItemIcon,
+	Typography
 } from '@mui/material'
-import '../../shared/styles/Header.css'
-import { Link } from 'react-router-dom'
-import { AuthServiceTokens } from '~/shared/utils/token.service.ts'
-import { SetStateAction, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import AccountCircle from '@mui/icons-material/AccountCircle'
+import Logout from '@mui/icons-material/Logout'
+import '../../shared/styles/Header.css'
+import { AuthServiceTokens } from '~/shared/utils/token.service.ts'
 
-const Header = ({ onLogout }) => {
-	const [anchorEl, setAnchorEl] = useState(null)
+const Header = () => {
+	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+	const navigate = useNavigate()
+	const open = Boolean(anchorEl)
 
 	const token = AuthServiceTokens.getRefreshToken()
 	const handleMenuClose = () => {
 		setAnchorEl(null)
 	}
 
-	const handleMenuOpen = (event: { currentTarget: SetStateAction<null> }) => {
+	const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget)
 	}
 
 	const handleLogout = () => {
 		handleMenuClose()
-		onLogout()
+		AuthServiceTokens.removerTokenFromStorage()
+		navigate('/login')
 	}
+
 	return (
 		<div className='headerContainer'>
 			<AppBar position='static' color='transparent' className='header'>
@@ -46,7 +52,7 @@ const Header = ({ onLogout }) => {
 						</Link>
 						<IconButton
 							sx={{ padding: '0 !important' }}
-							onClick={handleMenuOpen}
+							onClick={event => handleMenuOpen(event)}
 						>
 							<Avatar className='profileAvatar' />
 						</IconButton>
