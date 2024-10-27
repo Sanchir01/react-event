@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: <Main />,
+				element: <PrivateRoute element={<Main />} />,
 				loader: async () => {
 					store.dispatch(
 						apiHelpRequests.util.prefetch('getAllCards', undefined, {})
