@@ -112,7 +112,7 @@ const CardsList: React.FC<{ searchTerm: string; filters: FilterCriteria }> = ({
 			<Typography variant='h5' gutterBottom>
 				Найдено: {totalCards}
 			</Typography>
-			<Grid container spacing={3} sx={{ minHeight: '60vh' }}>
+			<Grid container spacing={3} sx={{ height: '843px' }}>
 				{currentCards.map((request: HelpRequest) => (
 					<Grid
 						item
@@ -125,10 +125,11 @@ const CardsList: React.FC<{ searchTerm: string; filters: FilterCriteria }> = ({
 						<FundraisingCard
 							title={request.title}
 							organizer={request.organization.title}
-							location={`Город: ${request.location.city}`}
+							location={request.location.city}
 							goal={request.goalDescription}
 							completionDate={request.endingDate}
-							collected={`${request.requestGoalCurrentValue} из ${request.requestGoal} руб`}
+							requestGoal={request.requestGoal}
+							requestGoalCurrentValue={request.requestGoalCurrentValue}
 							contributorsCount={request.contributorsCount}
 						/>
 					</Grid>

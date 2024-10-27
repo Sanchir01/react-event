@@ -9,7 +9,7 @@ import {
 	Divider,
 	LinearProgress
 } from '@mui/material'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import StarBorderIcon from '@mui/icons-material/StarBorder'
 import DementiaImage from '~/shared/assets/Dementia.png'
 
 interface FundraisingCardProps {
@@ -18,7 +18,8 @@ interface FundraisingCardProps {
 	location: string
 	goal: string
 	completionDate: string
-	collected: string
+	requestGoalCurrentValue: number
+	requestGoal: number
 	contributorsCount: number
 }
 
@@ -28,7 +29,8 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 	location,
 	goal,
 	completionDate,
-	collected,
+	requestGoalCurrentValue,
+	requestGoal,
 	contributorsCount
 }) => {
 	return (
@@ -44,7 +46,7 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 				padding: '16px'
 			}}
 		>
-			<CardContent>
+			<CardContent sx={{ padding: '0px' }}>
 				<Box display='flex' justifyContent='center' mb={2}>
 					<Avatar
 						alt='Dementia'
@@ -58,17 +60,22 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 					alignItems='center'
 					mb={2}
 				>
-					{' '}
-					<Typography variant='h6' gutterBottom>
-						{title}
-					</Typography>
-					<FavoriteBorderIcon color='action' />
+					<Box
+						display='flex'
+						justifyContent='space-between'
+						width='100% !important'
+					>
+						<Typography variant='h6' gutterBottom>
+							{title}
+						</Typography>
+						<StarBorderIcon color='action' />
+					</Box>
 				</Box>
 
 				<Typography variant='body2' color='textSecondary' gutterBottom>
 					<strong>Организатор:</strong> {organizer}
 				</Typography>
-				<Typography variant='body2' color='textSecondary'>
+				<Typography variant='body2' color='textSecondary' gutterBottom>
 					<strong>Локация:</strong> {location}
 				</Typography>
 				<Typography variant='body2' color='textSecondary' gutterBottom>
@@ -78,12 +85,19 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 					<strong>Завершение:</strong> {completionDate}
 				</Typography>
 				<Divider sx={{ my: 2 }} />
+
 				<Typography variant='body2' color='textSecondary'>
-					<strong>Мы собрали:</strong> {collected}
+					<strong>
+						Мы собрали: {requestGoalCurrentValue} из {requestGoal} руб.
+					</strong>
 				</Typography>
 				<LinearProgress
 					variant='determinate'
-					value={60}
+					value={
+						requestGoal <= 0
+							? 100
+							: Math.min(100, (100 * requestGoalCurrentValue) / requestGoal)
+					}
 					sx={{ mt: 1, mb: 2 }}
 				/>
 			</CardContent>
@@ -93,7 +107,8 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 					display: 'flex',
 					flexDirection: 'column',
 					justifyContent: 'space-between',
-					padding: 0
+					padding: 0,
+					alignItems: 'flex-start'
 				}}
 			>
 				<Typography variant='body2' color='textSecondary'>
@@ -103,7 +118,7 @@ const FundraisingCard: React.FC<FundraisingCardProps> = ({
 					fullWidth
 					variant='contained'
 					color='primary'
-					sx={{ marginBottom: '12px' }}
+					sx={{ marginBottom: '12px', marginLeft: '0px !important' }}
 				>
 					Помочь
 				</Button>
