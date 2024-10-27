@@ -23,7 +23,6 @@ const Providers = () => {
 				transition={Bounce}
 			/>
 			<CssBaseline />
-			<ProfileSection></ProfileSection>
 
 			<RouterProvider router={router} />
 		</Provider>
