@@ -6,7 +6,8 @@ const HelpRequestCard = ({
 	goal,
 	completionDate,
 	collected,
-	collectedGoal
+	collectedGoal,
+	contributorsCount
 }: HelpRequestCardType) => {
 	return (
 		<GeneralCardWithLinear
@@ -15,6 +16,7 @@ const HelpRequestCard = ({
 			completionDate={completionDate}
 			collected={collected}
 			collectedGoal={collectedGoal}
+			contributorsCount={contributorsCount}
 		/>
 	)
 }

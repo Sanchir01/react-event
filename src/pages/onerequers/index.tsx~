@@ -9,6 +9,8 @@ import { displayDate } from '~/shared/utils/dateUtils.tsx'
 import ErrorGetCard from '~/components/errorGetCard/ErrorGetCard.tsx'
 
 const HelpRequestPage = () => {
+	// const [searchParams, setSearchParams] = useSearchParams();
+
 	const { id = '' } = useParams<{ id: string }>()
 
 	const {

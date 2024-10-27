@@ -45,8 +45,8 @@ const GeneralCardWithLinear = ({
 				<LinearProgress
 					variant='determinate'
 					value={calculatePercentage({
-						totalValue: Number(collected),
-						currentValue: Number(collectedGoal)
+						totalValue: collected,
+						currentValue: collectedGoal
 					})}
 					sx={{ mt: 1, mb: 0 }}
 				/>
