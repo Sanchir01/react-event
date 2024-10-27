@@ -57,14 +57,15 @@ const HelpRequestPage = () => {
 	}
 
 	const AddToFavouriteEvent = async () => {
-		try {
-			await remove(id)
-			setAddedToFav(false)
-			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		} catch (e) {
-			const result = await mutate(id)
-			setAddedToFav(result?.error !== undefined && true)
+
+		if (addedToFav) {
+			await remove(id);
+			setAddedToFav(false);
+		} else {
+			await mutate(id);
+			setAddedToFav(true);
 		}
+
 	}
 	const renderData = () => {
 		return (
