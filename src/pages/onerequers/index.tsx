@@ -14,8 +14,6 @@ import React, {useState} from "react";
 import {useLoginMutation} from "~/app/store/api/login.ts";
 
 const HelpRequestPage = () => {
-	// const [searchParams, setSearchParams] = useSearchParams();
-
 	const { id = '' } = useParams<{ id: string }>()
     const [mutate] = useAddToFavouriteMutation();
     const [addedToFav, setAddedToFav] = useState(false);
