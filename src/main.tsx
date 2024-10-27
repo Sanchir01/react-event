@@ -1,13 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import Header from '~/components/Header/Header.tsx'
-import Footer from '~/components/Footer/Footer.tsx'
-import ProfileSection from './components/ProfileSection/ProfileSection.tsx'
 
+import Providers from '~/app/Providers.tsx'
+import CssBaseline from '@mui/material/CssBaseline'
+import '~/shared/styles/Global.css'
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-	<Header />
-	<ProfileSection />
-	<Footer />
+		<CssBaseline />
+		<Providers />
 	</StrictMode>
 )

@@ -1,14 +1,15 @@
-import { Provider } from "react-redux";
-import { Bounce, ToastContainer } from "react-toastify";
-import { store } from "~/app/store";
-import "react-toastify/dist/ReactToastify.css";
+import { Provider } from 'react-redux'
+import { Bounce, ToastContainer } from 'react-toastify'
+import { store } from '~/app/store'
+import 'react-toastify/dist/ReactToastify.css'
 import { RouterProvider } from 'react-router-dom'
 import { router } from '~/shared/routes'
+import CssBaseline from '@mui/material/CssBaseline'
 const Providers = () => {
 	return (
 		<Provider store={store}>
 			<ToastContainer
-				position="top-center"
+				position='top-center'
 				autoClose={5000}
 				hideProgressBar={false}
 				newestOnTop={false}
@@ -17,12 +18,14 @@ const Providers = () => {
 				pauseOnFocusLoss
 				draggable
 				pauseOnHover
-				theme="light"
+				theme='light'
 				transition={Bounce}
 			/>
-<RouterProvider router={router}/>
-		</Provider>
-	);
-};
+			<CssBaseline />
 
-export default Providers;
+			<RouterProvider router={router} />
+		</Provider>
+	)
+}
+
+export default Providers

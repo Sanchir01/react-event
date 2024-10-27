@@ -1,0 +1,11 @@
+.login {
+	&__form {
+		margin-top: 35px;
+	}
+	&__inputs {
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+		max-width: 485px;
+	}
+}
