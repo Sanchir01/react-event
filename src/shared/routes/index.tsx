@@ -39,8 +39,8 @@ export const router = createBrowserRouter([
 				element: <Login />
 			},
 			{
-				path: '/request',
-				element: <PrivateRoute element={<HelpRequestPage />} />
+				path: '/request/:id',
+				element: <PrivateRoute element={<HelpRequestPage/>} />
 			}
 		]
 	}
