@@ -9,6 +9,7 @@ export const UserProfilePage = () => {
 		document.title = 'Профиль'
 	}, [])
 	const { data, isLoading, isSuccess } = useGetProfileQuery()
+<<<<<<< HEAD
 	// const {
 	// 	data: favoritesData,
 	// 	isLoading: isLoadingFavorites,
@@ -22,11 +23,30 @@ export const UserProfilePage = () => {
 				{isLoading ? (
 					<>loading</>
 				) : isSuccess ? (
-					<Box sx={{ mt : '2px' }}>
+					<Box sx={{ mt: '2px' }}>
 						<ProfileSection userData={data} />
 					</Box>
+=======
+	const {
+		data: favoritesData,
+		isLoading: isLoadingFavorites,
+		isSuccess: isSuccessFavorites
+	} = useGetAllFavoritesQuery()
+	console.log('profile', favoritesData)
+	console.log(data)
+	return (
+		<>
+			<div className=''>
+				{ isLoading ? <>{/*loading*/}</> : isSuccess ? <>{/*{data.id}*/}</> : <>{/*error*/}</> }
+			</div>
+			<div className=''>
+				{isLoadingFavorites ? (
+					<>{/*loading*/}</>
+				) : isSuccessFavorites ? (
+					<>{/*test*/}</>
+>>>>>>> a6fe1b3d046bf580f03cc0be3dd02a9058889d1b
 				) : (
-					<>error</>
+					<>{/*error*/}</>
 				)}
 			</div>
 		</>

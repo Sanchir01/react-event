@@ -10,6 +10,7 @@ import { TelegramIcon } from '~/shared/assets/images/telegram.tsx'
 import { WhatsappIcon } from '~/shared/assets/images/whatsapp.tsx'
 import { VkIcon } from '~/shared/assets/images/vk.tsx'
 import { UserAvatar } from '~/shared/assets/images/userAvatar.tsx'
+import CardsList from '~/components/CardsList/CardsList.tsx'
 const ProfileSection: React.FC<{
 	userData: UserType
 }> = ({ userData }) => {
@@ -216,7 +217,16 @@ const FavoritesTab: React.FC<{
 )
 
 const FavoritesObjects: React.FC = () => (
-	<div className='favoritesContent'>{/* Компонент*/}</div>
+	<CardsList
+		searchTerm={''}
+		filters={{
+			categories: [],
+			specialization: [],
+			format: [],
+			volunteerType: [],
+			date: ''
+		}}
+	/>
 )
 
 const FavoritesDocuments: React.FC = () => (

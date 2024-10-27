@@ -59,7 +59,7 @@ const ProfileSidebar: React.FC<{
 	userData: UserType
 }> = ({ userData }) => (
 	<div className='profileSidebar'>
-		<UserAvatar/>
+		<UserAvatar />
 		<div className='userInfoBlock'>
 			<Typography variant='h6' className='userName'>
 				{userData.name + ' ' + userData.lastName}
