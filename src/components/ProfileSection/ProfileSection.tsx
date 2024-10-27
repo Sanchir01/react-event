@@ -5,12 +5,14 @@ import ListAltIcon from '@mui/icons-material/ListAlt'
 import PlaceIcon from '@mui/icons-material/Place'
 import './ProfileSection.css'
 import Map from './Map'
+import { UserType } from '~/shared/types/User.type'
 import { TelegramIcon } from '~/shared/assets/images/telegram.tsx'
 import { WhatsappIcon } from '~/shared/assets/images/whatsapp.tsx'
 import { VkIcon } from '~/shared/assets/images/vk.tsx'
 import { UserAvatar } from '~/shared/assets/images/userAvatar.tsx'
-
-const ProfileSection: React.FC = () => {
+const ProfileSection: React.FC<{
+	userData: UserType
+}> = ({ userData }) => {
 	const [selectedTab, setSelectedTab] = useState(0)
 	const [selectedIconTab, setSelectedIconTab] = useState(0)
 
@@ -24,7 +26,7 @@ const ProfileSection: React.FC = () => {
 				Мой профиль
 			</Typography>
 			<div className='profileSection'>
-				<ProfileSidebar />
+				<ProfileSidebar userData={userData} />
 
 				<div className='profileContent'>
 					<Tabs
@@ -38,8 +40,8 @@ const ProfileSection: React.FC = () => {
 					</Tabs>
 
 					<div className='tabContent'>
-						{selectedTab === 0 && <PersonalData />}
-						{selectedTab === 1 && <ContactInfo />}
+						{selectedTab === 0 && <PersonalData userData={userData} />}
+						{selectedTab === 1 && <ContactInfo userData={userData} />}
 						{selectedTab === 2 && (
 							<FavoritesTab
 								selectedIconTab={selectedIconTab}
@@ -53,15 +55,17 @@ const ProfileSection: React.FC = () => {
 	)
 }
 
-const ProfileSidebar: React.FC = () => (
+const ProfileSidebar: React.FC<{
+	userData: UserType
+}> = ({ userData }) => (
 	<div className='profileSidebar'>
 		<UserAvatar />
 		<div className='userInfoBlock'>
 			<Typography variant='h6' className='userName'>
-				Ангелина Фомина
+				{userData.name + ' ' + userData.lastName}
 			</Typography>
 			<Typography variant='body2' className='userStatus'>
-				<span className='label'>Статус:</span> Начинающий
+				<span className='label'>Статус:</span> {userData.status}
 			</Typography>
 		</div>
 		<Button variant='outlined' className='logoutButton'>
@@ -70,57 +74,83 @@ const ProfileSidebar: React.FC = () => (
 	</div>
 )
 
-const PersonalData: React.FC = () => (
-	<>
-		<Section title='Профиль'>
-			<InfoItem label='Фамилия' value='Фомина' />
-			<InfoItem label='Имя' value='Анжелина' />
-		</Section>
-		<Section title='Дата рождения'>
-			<Typography variant='body2'>13.02.1994</Typography>
-		</Section>
-		<Section title='Локация для помощи'>
-			<InfoItem label='Область' value='Владимирская' />
-			<InfoItem label='Населенный пункт' value='Владимир' />
-			<InfoItem label='Область' value='Нижегородская' />
-			<InfoItem label='Населенный пункт' value='Нижний Новгород' />
-		</Section>
-		<Section title='Образование'>
-			<InfoItem label='Учреждение' value='МОУ СОШ №7' />
-			<InfoItem label='Уровень образования' value='Средний общий' />
-			<InfoItem label='Год окончания' value='2010' />
-			<InfoItem
-				label='Учреждение'
-				value='Московский государственный университет им. М.В. Ломоносова'
-			/>
-			<InfoItem label='Уровень образования' value='Высшее' />
-			<InfoItem
-				label='Направление'
-				value='Информатика и вычислительная техника'
-			/>
-			<InfoItem label='Год окончания' value='2023' />
-		</Section>
-		<Section title='Обо мне'>
-			<Typography variant='body2' className='aboutMeText'>
-				Я волонтер, который работает с пенсионерами, и это приносит мне огромную
-				радость...
-			</Typography>
-		</Section>
-	</>
-)
+const PersonalData: React.FC<{
+	userData: UserType
+}> = ({ userData }) => {
+	const birthDate = new Date(userData.birthdate)
+	return (
+		<>
+			<Section title='Профиль'>
+				<InfoItem label='Фамилия' value={userData.lastName} />
+				<InfoItem label='Имя' value={userData.name} />
+			</Section>
+			<Section title='Дата рождения'>
+				<Typography variant='body2'>
+					{birthDate.toLocaleDateString('ru-RU')}
+				</Typography>
+			</Section>
+			<Section title='Локация для помощи'>
+				{userData.baseLocations.map(location => (
+					<div
+						key={location.latitude + location.longitude}
+						style={{ marginBottom: '20px' }}
+					>
+						<InfoItem label='Область' value={location.district} />
+						<InfoItem label='Населенный пункт' value={location.city} />
+					</div>
+				))}
+			</Section>
+			<Section title='Образование'>
+				{userData.educations.map(education => (
+					<div
+						key={education.organizationName + education.specialization}
+						style={{ marginBottom: '20px' }}
+					>
+						<InfoItem label='Учреждение' value={education.organizationName} />
+						<InfoItem label='Уровень образования' value={education.level} />
+						<InfoItem label='Направление' value={education.specialization} />
+						<InfoItem
+							label='Год окончания'
+							value={education.graduationYear.toString()}
+						/>
+					</div>
+				))}
+			</Section>
+			<Section title='Обо мне'>
+				<Typography variant='body2' className='aboutMeText'>
+					{userData.additionalInfo}
+				</Typography>
+			</Section>
+		</>
+	)
+}
 
-const ContactInfo: React.FC = () => (
+const ContactInfo: React.FC<{
+	userData: UserType
+}> = ({ userData }) => (
 	<>
 		<Section title='E-mail'>
-			<Typography variant='body2'>forexample12@gmail.com</Typography>
+			<Typography variant='body2'>{userData.contacts.email}</Typography>
 		</Section>
 		<Section title='Телефон'>
-			<Typography variant='body2'>+7 999 555 66 11</Typography>
+			<Typography variant='body2'>{userData.contacts.phone}</Typography>
 		</Section>
 		<Section title='Социальные сети'>
-			<SocialLink href='#' Icon={<VkIcon />} label='VKontakte' />
-			<SocialLink href='#' Icon={<TelegramIcon />} label='Telegram' />
-			<SocialLink href='#' Icon={<WhatsappIcon />} label='WhatsApp' />
+			<SocialLink
+				href={userData.contacts.social.vk}
+				Icon={<VkIcon />}
+				label='VKontakte'
+			/>
+			<SocialLink
+				href={userData.contacts.social.telegram}
+				Icon={<TelegramIcon />}
+				label='Telegram'
+			/>
+			<SocialLink
+				href={userData.contacts.social.whatsapp}
+				Icon={<WhatsappIcon />}
+				label='WhatsApp'
+			/>
 		</Section>
 	</>
 )

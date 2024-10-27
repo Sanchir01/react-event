@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-
 import { HelpRequest } from '~/shared/types/HelpRequest.types.ts'
 import { AuthServiceTokens } from '~/shared/utils/token.service'
 
@@ -28,7 +27,6 @@ export const apiHelpRequests = createApi({
 					Authorization: `Bearer ${AuthServiceTokens.getRefreshToken()}`
 				}
 			})
-			// transformResponse: (res: unknown) => HelpRequestTypes.parse(res)
 		})
 	})
 })
